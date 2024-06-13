@@ -15,4 +15,4 @@ jobs:
           root_file: main.tex
           latexmk_use_xelatex: true
           continue_on_error: false
-          extra_fonts: ./fonts/
+          extra_fonts: Fonts/
