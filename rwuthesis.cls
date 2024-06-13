@@ -27,7 +27,7 @@
 
 \PassOptionsToClass{12pt}{\rwuthesis@baseclass}
 
-\LoadClass[listof=nochaptergap]{scrreprt}
+\LoadClass{scrreprt}
 \RequirePackage{rwukoma}
 
 \ifthenelse{\equal{\rwuthesis@DIV}{}}{}{%
@@ -52,24 +52,27 @@
 \DeclareTranslation{English}{rwuthesis-bachelor-thesis}{Bachelor Thesis}
 \DeclareTranslation{German}{rwuthesis-bachelor-thesis}{Bachelor-Thesis}
 
-\DeclareTranslationFallback{rwuthesis-master-thesis}{Whitepaper: Rover to Mars}
-\DeclareTranslation{English}{rwuthesis-master-thesis}{Whitepaper: Rover to Mars}
-\DeclareTranslation{German}{rwuthesis-master-thesis}{Whitepaper: Rover to Mars}
+\DeclareTranslationFallback{rwuthesis-master-thesis}{Master Thesis}
+\DeclareTranslation{English}{rwuthesis-master-thesis}{Master Thesis}
+\DeclareTranslation{German}{rwuthesis-master-thesis}{Master-Thesis}
 
-\DeclareTranslationFallback{rwuthesis-degree-course}{}
-\DeclareTranslation{English}{rwuthesis-degree-course}{}
-\DeclareTranslation{German}{rwuthesis-degree-course}{}
+\DeclareTranslationFallback{rwuthesis-degree-course}{Degree Course}
+\DeclareTranslation{English}{rwuthesis-degree-course}{Degree Course}
+\DeclareTranslation{German}{rwuthesis-degree-course}{Studiengang}
 
 \DeclareTranslationFallback{rwuthesis-faculty}{Faculty of}
 \DeclareTranslation{English}{rwuthesis-faculty}{Faculty of}
 \DeclareTranslation{German}{rwuthesis-faculty}{Fakultät}
 
+\DeclareTranslationFallback{rwuthesis-reviewer-tablelayout}{@{}ll}
+\DeclareTranslation{English}{rwuthesis-reviewer-tablelayout}{@{}ll}
+\DeclareTranslation{German}{rwuthesis-reviewer-tablelayout}{@{}l@{ }ll}
 \DeclareTranslationFallback{rwuthesis-first-reviewer}{First Reviewer}
 \DeclareTranslation{English}{rwuthesis-first-reviewer}{First Reviewer}
-\DeclareTranslation{German}{rwuthesis-first-reviewer}{Erster Gutachter}
+\DeclareTranslation{German}{rwuthesis-first-reviewer}{1. & Gutachter}
 \DeclareTranslationFallback{rwuthesis-second-reviewer}{Second Reviewer}
 \DeclareTranslation{English}{rwuthesis-second-reviewer}{Second Reviewer}
-\DeclareTranslation{German}{rwuthesis-second-reviewer}{Zweiter Gutachter}
+\DeclareTranslation{German}{rwuthesis-second-reviewer}{2. & Gutachter}
 
 \DeclareTranslationFallback{rwuthesis-to-attain}{to attain the academic degree}
 \DeclareTranslation{English}{rwuthesis-to-attain}{to attain the academic degree}
@@ -79,10 +82,6 @@
 \DeclareTranslation{English}{rwuthesis-submitted-by}{submitted by}
 \DeclareTranslation{German}{rwuthesis-submitted-by}{vorgelegt von}
 
-\DeclareTranslationFallback{matriculation-number}{Matriculation number}
-\DeclareTranslation{English}{matriculation-number}{Matriculation number}
-\DeclareTranslation{German}{matriculation-number}{Matrikelnummer}
-
 \newcommand{\authormail}[1]{\newcommand{\rwuthesis@authormail}{#1}}
 \newcommand{\fordegree}[1]{\newcommand{\rwuthesis@fordegree}{#1}}
 \newcommand{\firstreviewer}[1]{\newcommand{\rwuthesis@firstreviewer}{#1}}
@@ -91,7 +90,6 @@
 \newcommand{\secondreviewermail}[1]{\newcommand{\rwuthesis@secondreviewermail}{#1}}
 \newcommand{\degreecourse}[1]{\newcommand{\rwuthesis@degreecourse}{#1}}
 \newcommand{\faculty}[1]{\newcommand{\rwuthesis@faculty}{#1}}
-\newcommand{\matnumber}[1]{\newcommand{\rwuthesis@matnumber}{#1}}
 
 \renewcommand{\maketitle}{%
 	\begin{titlepage}
@@ -109,13 +107,13 @@
 
 		\vfill
 
-		\ifthenelse{\equal{\rwuthesis@type}{bachelor}}{%
-			\textbf{\LARGE\GetTranslation{rwuthesis-bachelor-thesis}}
-		}{%
-			\textbf{\LARGE\GetTranslation{rwuthesis-master-thesis}}
-		}
+		\textbf{\Huge\@title}
 
-		\textbf{\Large\@title}
+		\ifthenelse{\equal{\rwuthesis@type}{bachelor}}{%
+			\textbf{\large\GetTranslation{rwuthesis-bachelor-thesis}}
+		}{%
+			\textbf{\large\GetTranslation{rwuthesis-master-thesis}}
+		}
 
 		\vfill
 
@@ -126,15 +124,11 @@
 
 		\GetTranslation{rwuthesis-submitted-by}:
 
-		\textbf{\Large\@author}
+		\textbf{\large\@author}
 		\ifthenelse{\isundefined{\rwuthesis@authormail}}{%
 			\ClassWarning{rwuthesis}{\protect\authormail\space undefined, no mail address on title page}
 		}{%
 			\\
-          \ifthenelse{\isundefined{\rwuthesis@matnumber}}{%
-          }{
-          \GetTranslation{matriculation-number}: \rwuthesis@matnumber\\
-          }
 			<\url{\rwuthesis@authormail}>
 		}
 
@@ -142,7 +136,7 @@
 
 		\vfill
 
-		\begin{tabular}{@{ }ll}
+		\begin{tabular}{\GetTranslation{rwuthesis-reviewer-tablelayout}}
 			\GetTranslation{rwuthesis-first-reviewer}: & \rwuthesis@firstreviewer
 			\ifthenelse{\isundefined{\rwuthesis@firstreviewermail}}{}{
 				<\url{\rwuthesis@firstreviewermail}>%
