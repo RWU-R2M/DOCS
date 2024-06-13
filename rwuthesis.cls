@@ -52,13 +52,13 @@
 \DeclareTranslation{English}{rwuthesis-bachelor-thesis}{Bachelor Thesis}
 \DeclareTranslation{German}{rwuthesis-bachelor-thesis}{Bachelor-Thesis}
 
-\DeclareTranslationFallback{rwuthesis-master-thesis}{Master Thesis}
-\DeclareTranslation{English}{rwuthesis-master-thesis}{Master Thesis}
-\DeclareTranslation{German}{rwuthesis-master-thesis}{Master-Thesis}
+\DeclareTranslationFallback{rwuthesis-master-thesis}{Whitepaper: Rover to Mars}
+\DeclareTranslation{English}{rwuthesis-master-thesis}{Whitepaper: Rover to Mars}
+\DeclareTranslation{German}{rwuthesis-master-thesis}{Whitepaper: Rover to Mars}
 
-\DeclareTranslationFallback{rwuthesis-degree-course}{Degree Course}
-\DeclareTranslation{English}{rwuthesis-degree-course}{Degree Course}
-\DeclareTranslation{German}{rwuthesis-degree-course}{Studiengang}
+\DeclareTranslationFallback{rwuthesis-degree-course}{}
+\DeclareTranslation{English}{rwuthesis-degree-course}{}
+\DeclareTranslation{German}{rwuthesis-degree-course}{}
 
 \DeclareTranslationFallback{rwuthesis-faculty}{Faculty of}
 \DeclareTranslation{English}{rwuthesis-faculty}{Faculty of}

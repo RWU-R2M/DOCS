@@ -1,54 +1,46 @@
-\documentclass[type=master,foot=true,colorhead=true]{rwuthesis} % twoside, BCOR=1cm,
+\documentclass[type=master,foot=true,colorhead=true]{rwuthesis}
 \usepackage[british]{babel}
-% https://tex.stackexchange.com/questions/282678/why-does-inputenc-abandon-so-quickly-under-utf8-based-engines
-%\usepackage[utf8]{inputenc} % not to use with xelatex
 
-% ============= Dokuinfo =============
-
-\usepackage[pdfusetitle]{hyperref}
-\hypersetup{ %https://en.wikibooks.org/wiki/LaTeX/Hyperlinks#Customization
-    colorlinks = true, 
-    breaklinks, %line breaking in a long hyperlink
-    urlcolor=black, %  \url colour
-    linkcolor =black, %  \ref colour
-    citecolor=rwuvioletlight% \cite colour
-}
-
-% ============= Packages =============
 \usepackage{color, url}
-\usepackage{float} %big H
+\usepackage{float}
 \usepackage{pdfpages}
 \usepackage{wrapfig}
 \usepackage{tabularx, multirow, booktabs}
 \usepackage{parcolumns}
+\usepackage[nohyperlinks, printonlyused, withpage, smaller]{acronym}    % list of abbreviations
+\usepackage{lipsum}                                                     % random text generator with \lipsum
 
+%-------------------------------- Coloring --------------------------------
 
-% List of abbreviations
-\usepackage[nohyperlinks, printonlyused, withpage, smaller]{acronym}
+\usepackage[pdfusetitle]{hyperref}
+\hypersetup{
+    colorlinks = true, 
+    breaklinks = true,          % line breaking in a long hyperlink
+    urlcolor=black,             % \url colour
+    linkcolor =black,           % \ref colour
+    citecolor=rwuvioletlight    % \cite colour
+}
 
-%%graphics and figures defined image path
+%-------------------------------- Grafik --------------------------------
+
 \usepackage{graphicx}
-\graphicspath{ {images/} }
-\usepackage{caption} %https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
-\usepackage{subcaption} % multiple figures with subcaptions
+\graphicspath{ {Images/} }
+\usepackage{caption} 
+\usepackage{subcaption}
 
-% Bibliography
 \usepackage{csquotes}
 \usepackage{comment}
 \usepackage[ 
-% https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex#Reference_guide
-% https://www.overleaf.com/learn/latex/Natbib_citation_styles
-% https://www.bibtex.com/e/entry-types/
-    backend=biber, % biber backend
-    natbib=true, % customising citations
-    sorting=nty, % sort name, title, year
-    style=numeric % https://de.overleaf.com/learn/latex/Biblatex_bibliography_styles
+    backend=biber, 
+    natbib=true, 
+    sorting=nty, 
+    style=numeric 
 ]{biblatex}
 
-% change text format of title field in @inproceedings and @article
+%-------------------------------- Bibliografie --------------------------------
+
 \DeclareFieldFormat[inproceedings,article]{title}{\textit{\MakeSentenceCase*{#1}}}
 
-% Redefine the bibliography driver for @misc entries for the wanted order of "repo_author/user. year. repo_name (Hash xx) [Software]. Github. URL"
 \DeclareBibliographyDriver{misc}{%
   \usebibmacro{author/editor+others/translator+others}%
   \setunit{\printdelim{nametitledelim}}\newblock
@@ -74,7 +66,8 @@
 }
 \addbibresource{source.bib}
 
-% adjust listings
+%-------------------------------- Adjust Listings --------------------------------
+
 \usepackage{listings}
 
 \definecolor{CodeBg}{RGB}{232,232,232}
@@ -91,106 +84,53 @@
   escapeinside=``
 }
 
+%-------------------------------- Adjust Math --------------------------------
 
-% math packages
-% \usepackage{amsfonts}
 \usepackage{amsmath}
-% \usepackage{amssymb}
-\usepackage{MnSymbol} % Math Symbol Font
+\usepackage{MnSymbol} % math symbol font
 
-% ============= additional settings or packages =============
-\usepackage{lipsum} % random text generator with \lipsum
+%-------------------------------- Custom Date --------------------------------
 
-%% date format in text
-\usepackage[nodayofweek]{datetime}
+\usepackage[nodayofweek]{datetime} % date format in text
 \newdateformat{mydate}{\twodigit{\THEDAY}{ }\shortmonthname[\THEMONTH] \THEYEAR}
 
-%% table settings
- % The triangle down symbols are not vertically alligned with the text. So raise the symbol manually
+%-------------------------------- Table Settings --------------------------------
+
+ % The triangle down symbols are not vertically alligned with the text. So raise the symbol manually:
 \newcommand{\triadown}{\raisebox{0.25\height}{$\filledmedtriangledown$}}
-% just for convenience abbreviate that command too
+% just for convenience abbreviate that command too:
 \newcommand{\triaup}{$\filledmedtriangleup$}
-% Custom column type which additionally centers a p column 
+% custom column type which additionally centers a p column 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
-%% line pitch
-\usepackage[onehalfspacing]{setspace} %singlespacing. onehalf-, double-
+%-------------------------------- Line Pitch And Escape Chars --------------------------------
 
-% custom command for strings with a lot of  escape characters
+\usepackage[onehalfspacing]{setspace} %singlespacing. onehalf-, double-
 \newcommand{\spcstring}[1]{\lstinline|#1|}
 
-% Increase number of captions available
-%https://tex.stackexchange.com/questions/186981/is-there-a-subsubsubsection-command
+%-------------------------------- Caption of figures/tables --------------------------------
 
-% Caption of figures/tables continuous
 \usepackage{chngcntr}
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
 
-% The tocdepth counter decides to which depth down the entries appear in the ToC
-% https://tex.stackexchange.com/questions/291307/how-to-hide-show-section-levels-in-the-table-of-contents
-% \setcounter{secnumdepth}{4}
-% \setcounter{tocdepth}{4}
-% \lstset{numberbychapter=false}
+%-------------------------------- MAIN --------------------------------
 
-% Document information
-\newcommand{\batitle}{Analysis of the reduction of ITLB cache pressure through code collocation based on the Linux kernel}
+\newcommand{\batitle}{Rover to Mars: Whitepaper }
 
 \title{\batitle}
-\author{Anton Gres}
-\authormail{anton.gres@rwu.de}
-\fordegree{Master of Engineering}
+\author{Leandro Ebner}
+\authormail{leandro.ebner@rwu.de}
+\fordegree{Scientific Work}
 \firstreviewer{Prof. Dr. rer. nat. Markus Pfeil}
 \firstreviewermail{markus.pfeil@rwu.de}
-\secondreviewer{Dipl.-Ing., Dr.techn. Wilfried Wessner}
-\secondreviewermail{wilfried.wessner@linutronix.de}
-\degreecourse{Electrical Engineering and Embedded\\Systems}
+\secondreviewer{Benjamin Stähle M.Sc.}
+\secondreviewermail{staehle@rwu.de}
+\degreecourse{Electrical Engineering \& Information Technology}
 \faculty{Electrical Engineering and Computer Science}
-\date{May 31st, 2023}
+\date{\today}
 
-% ==========================
 \begin{document}
 \maketitle
-\input{0_statutory_decleration.tex}
 
-\singlespacing
-\pagenumbering{arabic}
-\setcounter{page}{3} % change site numbering to start at 3
-
-\tableofcontents
-\newpage
-
-%\addtocontents{lof}{\linespread{1.25}\selectfont} % change spaces of listoffigures
-%\cleardoublepage
-% add custom hyperref and table of contents entries for figure list
-\phantomsection
-\addcontentsline{toc}{chapter}{\listfigurename}
-\addcontentsline{toc}{chapter}{\listtablename}
-% put figure and table information on same page
-\listoffigures
-\begingroup
-\let\clearpage\relax
-\listoftables
-\endgroup
-
-\newpage
-\lstlistoflistings
-\addcontentsline{toc}{chapter}{List of Listings}
-
-\newpage
-\onehalfspacing
-
-%\input{1_Einleitung.tex}
-\input{2_Zielsetzung.tex}
-\input{3_0_Grundlagen.tex}
-\input{4_0_Discussion.tex}
-\input{5_0_Implementation.tex}
-\input{5_1_Results.tex}
-\input{6_0_Improvements.tex}
-\input{7_0_Summary.tex}
-\input{8_0_Appendix.tex}
-
-\sloppy % set sloppy tolerances
-\printbibliography[heading=bibintoc]
-%\printbibliography[keyword=pic, title={Pictures only}]
 \end{document}
