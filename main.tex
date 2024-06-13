@@ -1,136 +1,28 @@
-\documentclass[type=master,foot=true,colorhead=true]{rwuthesis}
-\usepackage[british]{babel}
-
-\usepackage{color, url}
-\usepackage{float}
-\usepackage{pdfpages}
-\usepackage{wrapfig}
-\usepackage{tabularx, multirow, booktabs}
-\usepackage{parcolumns}
-\usepackage[nohyperlinks, printonlyused, withpage, smaller]{acronym}    % list of abbreviations
-\usepackage{lipsum}                                                     % random text generator with \lipsum
-
-%-------------------------------- Coloring --------------------------------
-
+\documentclass[type=master,twoside,BCOR=1cm]{rwuthesis}
 \usepackage[pdfusetitle]{hyperref}
-\hypersetup{
-    colorlinks = true, 
-    breaklinks = true,          % line breaking in a long hyperlink
-    urlcolor=black,             % \url colour
-    linkcolor =black,           % \ref colour
-    citecolor=rwuvioletlight    % \cite colour
-}
+\usepackage{lipsum}
 
-%-------------------------------- Grafik --------------------------------
-
-\usepackage{graphicx}
-\graphicspath{ {Images/} }
-\usepackage{caption} 
-\usepackage{subcaption}
-
-\usepackage{csquotes}
-\usepackage{comment}
-\usepackage[ 
-    backend=biber, 
-    natbib=true, 
-    sorting=nty, 
-    style=numeric 
-]{biblatex}
-
-%-------------------------------- Bibliografie --------------------------------
-
-\DeclareFieldFormat[inproceedings,article]{title}{\textit{\MakeSentenceCase*{#1}}}
-
-\DeclareBibliographyDriver{misc}{%
-  \usebibmacro{author/editor+others/translator+others}%
-  \setunit{\printdelim{nametitledelim}}\newblock
-  \printfield{year}%
-  \iffieldundef{year}{%
-    % Add "(n.d.). " if no year available
-    \printtext{\addspace\bibopenparen{n.d.}\bibcloseparen}
-    \setunit{\adddot\space}%
-  }{\setunit{\adddot\space}}%
-  \printfield{title}%
-  \setunit{\addspace}%
-  \iffieldundef{version}{%
-    \setunit{\space}
-  }{
-    \addspace
-    \printtext{(\printfield{version})
-   }
-  \setunit{\addspace}}%
-  \printfield{note}%
-  \setunit{\adddot\space}%
-  \usebibmacro{url+urldate}
-  \finentry
-}
-\addbibresource{source.bib}
-
-%-------------------------------- Adjust Listings --------------------------------
-
-\usepackage{listings}
-
-\definecolor{CodeBg}{RGB}{232,232,232}
-\definecolor{CodeGreen}{rgb}{0,0.6,0}
-
-\lstset{
-  language=bash,
-  basicstyle=\footnotesize,
-  backgroundcolor=\color{CodeBg},
-  showstringspaces=false,
-  commentstyle=\color{CodeGreen},
-  keywordstyle=\color{blue},
-  captionpos=b,
-  escapeinside=``
-}
-
-%-------------------------------- Adjust Math --------------------------------
-
-\usepackage{amsmath}
-\usepackage{MnSymbol} % math symbol font
-
-%-------------------------------- Custom Date --------------------------------
-
-\usepackage[nodayofweek]{datetime} % date format in text
-\newdateformat{mydate}{\twodigit{\THEDAY}{ }\shortmonthname[\THEMONTH] \THEYEAR}
-
-%-------------------------------- Table Settings --------------------------------
-
- % The triangle down symbols are not vertically alligned with the text. So raise the symbol manually:
-\newcommand{\triadown}{\raisebox{0.25\height}{$\filledmedtriangledown$}}
-% just for convenience abbreviate that command too:
-\newcommand{\triaup}{$\filledmedtriangleup$}
-% custom column type which additionally centers a p column 
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
-
-%-------------------------------- Line Pitch And Escape Chars --------------------------------
-
-\usepackage[onehalfspacing]{setspace} %singlespacing. onehalf-, double-
-\newcommand{\spcstring}[1]{\lstinline|#1|}
-
-%-------------------------------- Caption of figures/tables --------------------------------
-
-\usepackage{chngcntr}
-\counterwithout{figure}{chapter}
-\counterwithout{table}{chapter}
-
-%-------------------------------- MAIN --------------------------------
-
-\newcommand{\batitle}{Rover to Mars: Whitepaper }
-
-\title{\batitle}
-\author{Leandro Ebner}
-\authormail{leandro.ebner@rwu.de}
-\fordegree{Scientific Work}
-\firstreviewer{Prof. Dr. rer. nat. Markus Pfeil}
-\firstreviewermail{markus.pfeil@rwu.de}
-\secondreviewer{Benjamin Stähle M.Sc.}
-\secondreviewermail{staehle@rwu.de}
-\degreecourse{Electrical Engineering \& Information Technology}
+\title{Title of Thesis}
+\author{Max Mustermann, B.\,Sc.}
+\authormail{max.mustermann@rwu.de}
+\fordegree{Master of Science in Computer Science}
+\firstreviewer{Prof.~Dr.-Ing. Ida Stern}
+\firstreviewermail{stern@rwu.de}
+\secondreviewer{Prof.~Dr. Max Power}
+\secondreviewermail{power@rwu.de}
+\degreecourse{Computer Science (Master)}
 \faculty{Electrical Engineering and Computer Science}
 \date{\today}
 
 \begin{document}
+
 \maketitle
+\tableofcontents
+
+\chapter{First chapter}
+
+\lipsum
 
 \end{document}
+
+

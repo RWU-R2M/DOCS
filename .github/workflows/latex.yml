@@ -1,4 +1,4 @@
-name: Latex Compiler
+name: DOCS Rendering
 on:
   push:
     branches: main
@@ -7,7 +7,7 @@ jobs:
     name: Compiler
     runs-on: ubuntu-latest
     steps:
-      - name: Open DOCS Repository
+      - name: Checkout DOCS Repository
         uses: actions/checkout@v4
       - name: Compile LaTeX Source Code
         uses: xu-cheng/latex-action@v3
@@ -16,3 +16,14 @@ jobs:
           latexmk_use_xelatex: true
           continue_on_error: false
           extra_fonts: ./fonts/
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Renderings
+          path: ./docs/
+          retention-days: 90
+          compression-level: 0
+          overwrite: false
+
+          
+

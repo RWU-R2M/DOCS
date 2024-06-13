@@ -1,20 +1,40 @@
 \NeedsTeXFormat{LaTeX2e}[2017/01/01]
-\ProvidesPackage{rwufont}[2019/08/29 RWU corporate font package]
+\ProvidesPackage{rwufont}[2019/11/26 RWU corporate font package]
 
-\RequirePackage[no-math]{fontspec}
+\RequirePackage{kvoptions}
+\RequirePackage{ifthen}
+\RequirePackage{fontspec}
 
-\setmainfont[ExternalLocation=fonts/]{BarlowSemiCondensed-Regular.ttf}%
-    [Ligatures=TeX,
-    BoldFont=BarlowSemiCondensed-Bold.ttf,
-    ItalicFont=BarlowSemiCondensed-LightItalic.ttf,
-    BoldItalicFont=BarlowSemiCondensed-BoldItalic.ttf
-    ]
-\setsansfont[ExternalLocation=fonts/]{BarlowSemiCondensed-Regular.ttf}%
-    [Ligatures=TeX,
-    BoldFont=BarlowSemiCondensed-Bold.ttf,
-    ItalicFont=BarlowSemiCondensed-LightItalic.ttf,
-    BoldItalicFont=BarlowSemiCondensed-BoldItalic.ttf
-    ]
+\SetupKeyvalOptions{
+	family=rwufont,
+	prefix=rwufont@
+}
+
+\DeclareStringOption[barlowsc]{fontsetup}
+
+\ProcessKeyvalOptions*
+
+\setsansfont[Ligatures=TeX]{Barlow Semi Condensed}
+
+\ifthenelse{\equal{\rwufont@fontsetup}{barlowsc}}{
+	\setmainfont[Ligatures=TeX]{Barlow Semi Condensed}
+}{
+	\ifthenelse{\equal{\rwufont@fontsetup}{barlow}}{
+		\setmainfont[Ligatures=TeX]{Barlow}
+	}{
+		\ifthenelse{\equal{\rwufont@fontsetup}{basic}}{
+			% do not set up main font
+		}{
+			\PackageError{rwufont}{Invalid fontsetup option}{%
+				Please use one of the following:\MessageBreak%
+				\space\space fontsetup=barlowsc\MessageBreak%
+				\space\space fontsetup=barlow\MessageBreak%
+				\space\space fontsetup=basic\MessageBreak%
+			}
+		}
+	}
+}
+
 
 \providecommand*{\glqq}{\mbox{\char"201E}}
 \renewcommand*{\glqq}{\mbox{\char"201E}}
