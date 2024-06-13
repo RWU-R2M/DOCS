@@ -1,1 +1,7 @@
-
+name: Latex-Compiler
+on:
+  push:
+    branches:
+      - "main"
+      
+job: 
