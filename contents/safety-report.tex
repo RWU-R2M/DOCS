@@ -1,3 +1,40 @@
+\section{Introduction}
+
+This document will serve as a comprehensive guide through the entire power distribution and wiring system of our rover. It meticulously details all relevant safety measures designed to minimize the likelihood of hazards or environmental damage. By following these guidelines, we aim to ensure that our work adheres to the highest safety standards. 
+
+\vspace{5mm}
+
+In addition to outlining essential safety protocols, this guide sets forth the minimum standards for both material and personal safety. These standards apply not only during the construction phase but also throughout the actual operation of all electronic components. To enhance understanding and clarity, we have included several schematics, data sheets, and detailed calculations. These resources are designed to provide a thorough illustration of the rover's internal architecture and functionality, making the document as informative and accessible as possible.
+
+\begin{table}[b]
+    \centering
+    \begin{tabular}{|c|c|c|c|} \hline 
+         Revision&  Date submitted& Summary of changes  &Authored\\ \hline 
+         v1.0.0&  16.06.2024& Inital release  &Leandro Ebner\\ \hline
+    \end{tabular}
+\end{table}
+\clearpage
+
+\section{Hazardous Material List}
+
+Our rover contains 
+
+Dino-bot's power architecture consists of an energy storage module, an emergency stop system, a main
+power distribution system, a secondary power distribution and several
+downstream devices.
+
+
+The legend for the rover systems architecture, and the detailed circuit diagrams is
+shown below.
+The rover uses 5 standard voltages for the distribution. These are unregulated 22.2v
+from the battery, a regulated 12v for linear actuators and Arduino Mega, a regulated 9v
+four ip cameras, a regulated 6.5v for servo motors and regulated 5v for Rasperry Pi’s.
+
+\newpage
+
+
+
+\newpage
 \section{Power Architecture}
 
 
@@ -34,6 +71,33 @@ To completely minimize the possibility of creating ground loops by accident, the
 \section{Unused Circuits}
 
 \section{Circuit Table}
+
+\section{Appendix}
+
+\paragraph{Safety Requirements}
+
+\begin{enumerate}
+    \item The rover must not include any flammable, environmentally damaging, or otherwise hazardous liquids or gasses, except:
+    \begin{enumerate}
+        \item Within a permanently sealed component such as a battery;
+        \item Commercially-available lubricants as required by mechanical assemblies, where care is taken to avoid overuse and contamination.
+    \end{enumerate}
+    \item Each rover must be equipped with at least one kill switch:
+    \begin{enumerate}
+        \item The pressable area of the kill switch must be at least $10 cm^2$ and red in color. Levers or toggle switches are not acceptable.
+        \item No other button on the rover may be red.
+        \item Kill switches must be mounted on the top of the rover, with the button oriented toward the sky in the rover’s normal driving orientation.
+        \item A keep out region must be maintained around the kill switch with a radius of 15cm: No components taller than the base of the kill switch may intrude on the keep out region.
+        \item Kill switches must not be obstructed by a cover or sleeve which extends above the pressable surface, and must be mounted such that it will not be obstructed by other components during rover operation.
+        \item The circuit including the kill switch must include appropriate circuit protection, and the “break” or “disconnect” current rating of the kill switch must exceed the current rating of the circuit protection.
+        \item The function of the kill switch must not depend on the integrity of any power source or computerized system. Indirect switching by relays or similar devices is permitted as long as these are driven by the kill switch, and reliably turn off when their control line is disconnected.
+        \item The function of the kill switch must not depend on the integrity of any particular wiring connection; for example, physically tearing the kill switch off the rover should produce the same effect as pressing it.
+        \item If multiple kill switches are installed on the rover, pressing any one must cut all power to to the rover.
+        \item The function of the kill switch must not be disabled or bypassed by any means.
+        \item Rovers should have a remote motion stop for disabling a run-away rover, such as a dead man’s switch on a lead, or a radio-frequency system that operates independently of the rover communications system.
+    \end{enumerate}
+    
+\end{enumerate}
 
 
 
