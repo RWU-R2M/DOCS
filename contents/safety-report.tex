@@ -18,17 +18,21 @@
 
     \begin{table}[b]
         \centering
-        \begin{tabular}{|c|c|c|c|} \hline 
-             Revision&  Date submitted& Summary of changes  &Authored\\ \hline 
-             v1.0.0&  16.06.2024& Initial release  &Leandro Ebner\\ \hline
+        \begin{tabular}{|l|l|l|l|} \hline 
+             Revision&  Date submitted& Summary of changes  &Authored \\ \hline 
+             v1.0.0&  16.06.2024& Initial release  &Leandro Ebner \\ \hline
         \end{tabular}
     \end{table}
-    
+
     \clearpage
 
 \section{Hazardous Material List}
 
-    The rover is \ref{test}
+    \paragraph{Batteries} 
+    \vspace{5mm}
+    
+    The rover is using two lithium-polymer batteries (further referred to as LiPo batteries) to power all the electronics. Batteries, in general, are compliant with the regulation \ref{battery} as long as they are sealed and follow certain safety guidelines. LiPo batteries are designed as permanently sealed units, which contain their electrolytes within durable casing materials. This prevents the escape of hazardous substances under normal operating conditions. This cell chemistry is widely used in consumer electronics, remote-controlled vehicles, and other devices where safety and environmental compliance are critical and high requirements for electrical output power are necessary. This demonstrates their reliability and safety under proper use. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively.
+
     \clearpage
     
 \section{Power Architecture}
@@ -61,31 +65,25 @@
     \clearpage
     \subsection{Basic structure}
 
-    \begin{wrapfigure}{R}{6cm}
-    \includegraphics[width=5cm]{contents/figures/power-architecture.png}
+    The main layout of the electric components is built around the fundamental principle of the parallel power system in the rover. The main energy storage contains the two unregulated 24V (6s) and 12V (3s) power sources in form of LiPo batteries which are fed into an emergency stop system. 
+    
+    \begin{figure}[h]
+    \includegraphics[width=8cm]{contents/figures/power-architecture.png}
     \label{power_architecture}
-    \caption{test}
-    \end{wrapfigure}
-
-    The main layout of the electric components is built around the fundamental principle of two parallel power systems in the rover. The main energy storage contains the two unregulated 24V and 12V power sources which are fed into an emergency stop system. 
-
-
-
-    Dino-bot's power architecture consists of an energy storage module, an emergency stop system, a main
-power distribution system, a secondary arm power distribution (for use in some tasks), and several
-downstream devices.
-
+    \caption{}
+    \end{figure}
     
     
     \clearpage
     \begin{figure}
         \centering
-        \includegraphics[scale=1]{contents/figures/wiring-power.png}
+        \includegraphics[scale=\textwidth]{contents/figures/wiring-power.png}
         \caption{Caption}
-        \label{wiring-power}
+        \label{wiring_power}
     \end{figure}
 
     
+
 
 
 
@@ -105,12 +103,24 @@ downstream devices.
 
 \section{Appendix}
 
+\paragraph{Definitions}
+
+    \begin{enumerate}
+        \item The word “should” indicates a suggestion which may become a requirement in future competitions.
+        \item A "circuit" is one or more electricity-consuming devices (and the connections between them) which draw current from a single power source through a common circuit protection element.
+        \item "Regulators" consume and provide power, with their input and outputs counting as at least one circuit each.
+        \item The "current rating" of a component is the manufacturer-published value indicating the maximum acceptable amperage consumed or provided by the device in normal continuous conditions. Transient, burst, or peak current limits are not current ratings.
+        \item The current rating of circuit protection is the amperage above which it is designed to interrupt current flow.
+        \item "Circuit protection" is a fuse or electromechanical circuit breaker which reliably interrupts excessive current flows through a connected circuit. Software-based solutions are insufficient. Motor controllers, power regulators, or other devices with current limiting capabilities are not sufficient for use as circuit protection. Self-resetting fuses are also insufficient.
+        \item A "kill switch" is a physical switch mounted on a rover which, when pressed down, causes the interruption of power to all rover systems until the switch is manually reset.
+    \end{enumerate}
+
 \paragraph{Safety Requirements}
 
 \begin{enumerate}
     \item The rover must not include any flammable, environmentally damaging, or otherwise hazardous liquids or gasses, except:
     \begin{enumerate}
-        \item Within a permanently sealed component such as a battery; \label{test}
+        \item Within a permanently sealed component such as a battery; \label{battery}
         \item Commercially-available lubricants as required by mechanical assemblies, where care is taken to avoid overuse and contamination.
     \end{enumerate}
     \item Each rover must be equipped with at least one kill switch:
