@@ -68,21 +68,19 @@
     \clearpage
     \subsection{Basic Electric Layout}
 
-    The main layout of the electric construction is built around the fundamental principle of the parallel power system in the rover, whose benefits have already been discussed. The main energy storage contains two unregulated 24V (6S) and 12V (3S) power sources in the form of LiPo batteries. which are fed into an emergency stop system. This system's 
-
- 
+    The main layout of the electrical construction is built around the fundamental principle of parallel power usage in the rover, whose benefits have already been discussed in proper detail. The main energy storage contains two unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. These batteries provide the necessary power to drive the rover's electronics and mechanical components. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. The BMS ensures that each battery operates within safe parameters and helps to prolong the lifespan of the batteries by preventing overcharging and deep discharging. Additionally, this area is where the main battery fusing for the primary and secondary batteries can be found. The fuses protect the rover's circuitry by breaking the connection in case of an overload or short circuit. Due to the fact that these components are strictly connected to the individual batteries, they change frequently and are the actual part where batteries will be swapped during regular operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. This emergency stop system uses a main relay to cut off and isolate both batteries from the rover with the help of a separate kill switch. The emergency stop system is a safety feature that ensures the rover can be immediately powered down in case of an emergency, protecting both the rover and its surroundings.
     
     \begin{figure}[h]
-    \includegraphics[width=\textwidth]{contents/figures/power-architecture.png}
+    \includegraphics[width=\textwidth]{contents/figures/power-architecture-v1.1.0.png}
+    \caption{Basic electrical layout split in 3 main categories.}
     \label{power_architecture}
-    \caption{}
     \end{figure}
     
     
     \clearpage
     \begin{figure}
-        \centering
-        \includegraphics[scale=\textwidth]{contents/figures/wiring-power.png}
+
+        \includegraphics[width=\textwidth]{contents/figures/wiring-diagram-p-v1.1.0.png}
         \caption{Caption}
         \label{wiring_power}
     \end{figure}
@@ -163,8 +161,8 @@
             \item This circuit protection must be installed as close as possible to the battery.
             \item Each battery must be protected by a battery management system that provides under-voltage lockout protection.
             \begin{enumerate}
-                \item test
-                \item tst
+                \item The battery management system should provide cell voltage monitoring, over-current protection, and over-voltage protection.
+                \item Batteries should be connected to their battery management systems at all times, not only when installed on the rover.
             \end{enumerate}
             \item All wiring and connecting hardware between the battery and circuit protection must be fully secured and insulated such that no reasonable impact, vibration, loose object, or liquid could possibly create an unprotected short circuit.
             \item If multiple batteries are used, each must have its own fuse according to these requirements. You may not connect multiple batteries without a circuit protection element per battery.
@@ -173,7 +171,7 @@
             \item Teams should store batteries in fireproof bags (ie Lipo storage bag).
         \end{enumerate}
         %---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        
+        \item 
     \end{enumerate}
 
 
