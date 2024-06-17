@@ -28,10 +28,17 @@
 
 \section{Hazardous Material List}
 
-    \paragraph{Batteries} 
+    \subsection{Batteries}
+    
+    The rover is using two lithium-polymer based batteries (further referred to as LiPo batteries) to power all the electronics. Batteries, in general, are compliant with the regulations set by the CIRC (see \ref{battery} of the appendix) as long as they are sealed and follow certain safety guidelines. LiPo batteries are designed as permanently sealed units, which contain their electrolytes within durable casing materials. This prevents the escape of hazardous substances under normal operating conditions. This cell chemistry is widely used in consumer electronics, remote-controlled vehicles, and other devices where safety and environmental compliance are critical and high electrical characteristics are required. This demonstrates their reliability and safety under proper use and are known for a high energy density as well as output power capability. For this reason, the LiPo cell chemistry was also utilized for energy storage in the rover.
+    
     \vspace{5mm}
     
-    The rover is using two lithium-polymer batteries (further referred to as LiPo batteries) to power all the electronics. Batteries, in general, are compliant with the regulation \ref{battery} as long as they are sealed and follow certain safety guidelines. LiPo batteries are designed as permanently sealed units, which contain their electrolytes within durable casing materials. This prevents the escape of hazardous substances under normal operating conditions. This cell chemistry is widely used in consumer electronics, remote-controlled vehicles, and other devices where safety and environmental compliance are critical and high requirements for electrical output power are necessary. This demonstrates their reliability and safety under proper use. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively.
+    LiPo batteries feature a nominal voltage of around 3.7V per cell, depending on the exact type of internal chemistry. Higher output voltages are achieved by connecting several individual cells in series with each other, still being housed in the same battery enclosure. Therefore, the (series) cell count of a LiPo battery is a fundamental property of any LiPo battery and a direct measure for the expected output voltage. 
+    
+    Usually, this property is indicated in the following way: 
+    "3S LiPo Battery", whereas "3S" is refering to a total series cell count of three. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively.
+    
 
     \clearpage
     
