@@ -56,13 +56,13 @@
 \DeclareTranslation{English}{rwuthesis-master-thesis}{Master Thesis}
 \DeclareTranslation{German}{rwuthesis-master-thesis}{Master-Thesis}
 
-\DeclareTranslationFallback{rwuthesis-degree-course}{}
-\DeclareTranslation{English}{rwuthesis-degree-course}{}
-\DeclareTranslation{German}{rwuthesis-degree-course}{}
+\DeclareTranslationFallback{rwuthesis-degree-course}{Degree course:\n}
+\DeclareTranslation{English}{rwuthesis-degree-course}{Degree course:\n}
+\DeclareTranslation{German}{rwuthesis-degree-course}{Studiengang:\n}
 
-\DeclareTranslationFallback{rwuthesis-faculty}{Faculty of}
-\DeclareTranslation{English}{rwuthesis-faculty}{Faculty of}
-\DeclareTranslation{German}{rwuthesis-faculty}{Fakultät}
+\DeclareTranslationFallback{rwuthesis-faculty}{Faculty:\n}
+\DeclareTranslation{English}{rwuthesis-faculty}{Faculty:\n}
+\DeclareTranslation{German}{rwuthesis-faculty}{Fakultät:\n}
 
 \DeclareTranslationFallback{rwuthesis-reviewer-tablelayout}{@{}ll}
 \DeclareTranslation{English}{rwuthesis-reviewer-tablelayout}{@{}ll}
