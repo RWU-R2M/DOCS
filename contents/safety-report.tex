@@ -101,7 +101,17 @@
 
     \clearpage
 
-    \begin{table}
+    \subsubsection{Voltage Rails}
+
+    The rover provides 4 different voltage levels to the individual components. The primary and secondary LiPo batteries output unregulated $24V$ and $12V$. This choice is based on the fact that those two voltages are quite common in the industry and are used in various fields of applications. As already mentioned, the $24V$ power rail is paired with all the devices demanding high power and therefore coming with a high current draw. Big currents always go hand in hand with the necessity of larger wire cross-sections, which results in increased costs, weight and more challenging wiring. This is a direct cause of "Ohm's Law". The total electrical power P is defined as $P_{Electrical}=U*I$. Using a higher voltage can help to tackle those problems due to lowering the overall flowing current, while also improving the total efficiency of the system as a side effect. Less power being dissipated in the form of heat is one cause of that, which can be calculated as $P_{Loss}=R*I^2$ . The best-case scenario would be close to no voltage regulating components at all, powering everything directly by the voltage the batteries supply on their own. This is however not always possible. Using a standardized supply voltage to determine what battery to use is a good approach to minimize the need of voltage converters and to keep the complexity low. While there exist components and systems for higher voltages like $48V$, they come with a significant bigger problem when used in combination with battery power. The output power of a battery does not remain constant during a normal charge/discharge cycle. During normal operation, the voltage of each battery cell fluctuates at around $0.8V$. Pairing more battery cells in series also increases the absolute voltage difference between a fully charged and discharged battery. While components with internal voltage regulators may handle that without noticeable difference, motors and electronic speed controllers can cause problems. To ensure a somewhat similar behaviour of the rover (driving speed, torque output, etc.), keeping the primary battery voltage at $24V$ is a good compromise between power efficiency and voltage stability. 
+
+    \vspace{5mm}
+
+    Due to the fact the unregulated $12V$ rail is only used and intended for low-energy appliances to minimize complexity and load of the battery and secondary circuit, $12V$ is sufficient in this case. Also, this doubles as second native voltage source.There is also a dedicated buck-converter for having a high power $12$ rail to step down the $24V$ of the primary battery to be used in combination with the servo motors for steering the rover. This step was mandatory, because the servo-motors are not connected to another motor driver or similar circuit and are run directly by the voltage applied to their terminals. To ensure a stable applied voltage and to make the choice of servo-motors 
+
+    
+
+    \begin{table}[b]
         \centering
         \begin{tabular}{|r|r|r|r|r|} \hline 
              color&  code &  cross-section&  equivalent to& ampacity\\ \hline 
