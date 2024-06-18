@@ -14,7 +14,7 @@
     This document is built using several packages originally developed by Stefan Gast for being compliant with RWU's corporate design. Due to fact that repository is archived now, an active fork is available for public at: \\
     \href{https://github.com/leandroebner/latex-rwustyle}{https://github.com/leandroebner/latex-rwustyle} 
 
-    The source code to build this document, including all relevant information about the R2M project is available in a dedicated GitHub organization and actively maintained by it's contributors: \\
+    The source code to build this document, including all relevant information about the R2M project is available in a dedicated GitHub organization and actively maintained by its contributors: \\
     \href{https://github.com/RWU-R2M}{https://github.com/RWU-R2M}
 
     
@@ -44,7 +44,7 @@
     
     \vspace{5mm}
     
-    LiPo batteries feature a nominal voltage of around $3.7V$ per cell, depending on the exact type of internal chemistry. Higher output voltages are achieved by connecting several individual cells in series with each other, still being housed in the same battery enclosure. Therefore, the (series) cell count of a LiPo battery is a fundamental property of any LiPo battery and a direct measure for the expected output voltage. Usually, this property is indicated in the following way: "3S LiPo Battery", whereas "3S" is referring to a total series cell count of three. This results in a nominal voltage of around $11.1V$. For this exact reason, LiPo batteries can't be manufactured for an arbitrary output voltage and certain compromises must be made. The rover is built upon the idea of having a $24V$ battery supply as the main voltage for high power applications and another $12V$ battery supply for all logic and controlling components. This results in a 6S and 3S configuration of battery cells to closely match those voltages. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively.
+    LiPo batteries feature a nominal voltage of around $3.7V$ per cell, depending on the exact type of internal chemistry. Higher output voltages are achieved by connecting several individual cells in series with each other, still being housed in the same battery enclosure. Therefore, the (series) cell count of a LiPo battery is a fundamental property of any LiPo battery and a direct measure for the expected output voltage. Usually, this property is indicated in the following way: "3S LiPo Battery", whereas "3S" is referring to a total series cell count of three. This results in a nominal voltage of around $11.1V$. For this exact reason, LiPo batteries can't be manufactured for an arbitrary output voltage and certain compromises must be made. The rover is built upon the idea of having a $24V$ battery supply as the main voltage for high power applications and another $12V$ battery supply for all logic and controlling components. This results in a 6S and 3S configuration of battery cells to closely match those voltages. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively. The conecept of using multiple battieres during normal operation in the rover, compared to single power source we be further addressed.
 
     \clearpage      
     
@@ -58,9 +58,10 @@
     \label{ground_loop_bad}
     \end{figure}
     
-    The issue is the inductance of the power wires between the motor controllers and the battery. This inductance, coupled with the high current drawn by the motor controllers, causes $V_1$ to be different as $V_2$, leading to potential mismatch in the voltage levels. As the motor controllers demand substantial current, the wire inductance can generate significant voltage drops along the power lines. If the voltage caused by the wire inductance and current is high enough, the 0-5V GPIO signals can swing much higher or lower than the defined voltage range, potentially exceeding safe operational limits. These fluctuations in voltage can introduce erratic behavior in the control system, compromising the performance and reliability of the motor controllers. This causes a current to flow through the ODrives GPIO pins, which can lead to unintended electrical noise and potential damage to sensitive electronic components.
+    The issue is the inductance of the power wires between the motor controllers and the battery. This inductance, coupled with the high current drawn by the motor controllers, causes $V_1$ to be different as $V_2$, leading to potential mismatch in the voltage levels. As the motor controllers demand substantial current, the wire inductance can generate significant voltage drops along the power lines. If the voltage caused by the wire inductance and current is high enough, the $0-5V$ GPIO signals can swing much higher or lower than the defined voltage range, potentially exceeding safe operational limits. These fluctuations in voltage can introduce erratic behavior in the control system, compromising the performance and reliability of the motor controllers. This causes a current to flow through the ODrives GPIO pins, which can lead to unintended electrical noise and potential damage to sensitive electronic components.
 
     \clearpage
+    
     \subsection{Reducing length of high-current wires}
     
     To mitigate these effects, it is substantial to keep the main powers as short as possible. All wires have some amount of inductance, which is an inherent property of any conductor through which current flows. The inductance is proportional to the length of the wires and the area of the loop formed by the power wires, meaning longer wires and larger loops will have higher inductance. This inductance can create unwanted resistance to changes in current flow, leading to voltage drops and potential interference with the system's performance. It is beneficial to keep those wires as short as possible and as close together as possible. By doing so, the loop area is minimized, and the inductance is reduced, thereby mitigating the adverse effects. However, this reduces the effect of the problem but does not eliminate it entirely, as even minimal inductance can cause issues in high-frequency and high-current applications.
@@ -76,21 +77,30 @@
     \end{figure}
 
     \clearpage
+    
     \subsection{Basic Electric Layout}
 
-    The main energy storage contains two unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. Additionally, the main fusing for the primary \& secondary battery can be found. The fuses protect the rover's circuitry as well as the batteries themselves. Due to the fact, that these components are strictly connected to the individual batteries, they change frequently with each battery exchange during normal operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. Afterwards, the power travels into two separate distribution and fusing circuits before supplying the actual components and voltage converters further down the line.
+    While it would be possible to use DC/DC isolators whenever a ground loop could appear, it is more straight forward and easier to implement a complete different power solution. The main energy storage contains two unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. Additionally, the main fusing for the primary \& secondary battery can be found. The fuses protect the rover's circuitry as well as the batteries themselves. Due to the fact, that these components are strictly connected to the individual batteries, they change frequently with each battery exchange during normal operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. Afterwards, the power travels into two separate distribution and fusing circuits before supplying the actual components and voltage converters further down the line. To illustrate that, see the attached figure \ref{power_architecture}.
     
     \begin{figure}[h]
     \includegraphics[width=\textwidth]{contents/figures/power-architecture-v1.1.0.png}
-    \caption{Basic electrical layout split in the main 4 categories. Each category serves a different purpose (i.e. safely distributing the power or connecting the individual components).}
+    \caption{Basic electrical layout split in the main 4 categories. Each category serves a different purpose (in example safely distributing the power or connecting the individual components with each other).}
     \label{power_architecture}
     \end{figure}
 
     \clearpage
 
-    
+    \subsection{Wiring Diagram}
 
-    
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.1.png}
+    \caption{The wiring diagram incorporates several different aspects about how the rover is wired up. This includes individual cross-sections, voltages and physical location of connections. A detailed listing and legend is given in the follwowing pages.}
+    \label{wiring_power}
+    \end{figure}
+
+    \clearpage
+
     \begin{table}
         \centering
         \begin{tabular}{|r|r|r|r|r|} \hline 
@@ -101,18 +111,8 @@
              red&    RD \#FF0000&  $10,0mm^2$&  8 AWG& 55 Amps\\ \hline
         \end{tabular}
         \caption{Caption}
-        \label{color-codes}
+        \label{color_codes}
     \end{table}
-
-    \clearpage
-
-    \begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.0.png}
-    \caption{tst}
-    \label{wiring_power}
-    \end{figure}
-
     
 
 
@@ -132,6 +132,8 @@
 
 \section{Circuit Table}
 
+    \clearpage
+
 \section{Appendix}
 
     \subsection{Definitions}
@@ -140,9 +142,9 @@
         \item The word \textit{should} indicates a suggestion which may become a requirement in future competitions.
         \item A \textit{circuit} is one or more electricity-consuming devices (and the connections between them) which draw current from a single power source through a common \textit{circuit protection} element.
         \item \textit{Regulators} consume and provide power, with their input and outputs counting as at least one \textit{circuit} each.
-        \item The \textit{current rating} of a component is the manufacturer-published value indicating the maximum acceptable amperage consumed or provided by the device in normal continuous conditions. Transient, burst, or peak current limits are \textbf{not} current ratings.
+        \item The \textit{current rating} of a component is the manufacturer-published value indicating the maximum acceptable amperage consumed or provided by the device in normal continuous conditions. Transient, burst, or peak current limits are \textbf{not} \textit{current ratings}.
         \item The \textit{current rating} of \textit{circuit protection} is the amperage above which it is designed to interrupt current flow.
-        \item \textit{Circuit protection} is a fuse or electromechanical circuit-breaker which reliably interrupts excessive current flows through a connected \textit{circuit}. Software-based solutions are \textbf{insufficient}. Motor controllers, power regulators, or other devices with current limiting capabilities are \textbf{not} sufficient for use as circuit protection. Self-resetting fuses are also \textbf{insufficient}.
+        \item \textit{Circuit protection} is a fuse or electromechanical circuit-breaker which reliably interrupts excessive current flows through a connected \textit{circuit}. Software-based solutions are \textbf{insufficient}. Motor controllers, power regulators, or other devices with current limiting capabilities are \textbf{not} sufficient for use as \textit{circuit protection}. Self-resetting fuses are also \textbf{insufficient}.
         \item A \textit{kill switch} is a physical switch mounted on a rover which, when pressed down, causes the interruption of power to \textbf{all} rover systems until the switch is manually reset.
     \end{enumerate}
 
