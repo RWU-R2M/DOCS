@@ -44,7 +44,7 @@
     
     \vspace{5mm}
     
-    LiPo batteries feature a nominal voltage of around $3.7V$ per cell, depending on the exact type of internal chemistry. Higher output voltages are achieved by connecting several individual cells in series with each other, still being housed in the same battery enclosure. Therefore, the (series) cell count of a LiPo battery is a fundamental property of any LiPo battery and a direct measure for the expected output voltage. Usually, this property is indicated in the following way: "3S LiPo Battery", whereas "3S" is referring to a total series cell count of three. This results in a nominal voltage of around $11.1V$. For this exact reason, LiPo batteries can't be manufactured for an arbitrary output voltage and certain compromises must be made. The rover is built upon the idea of having a $24V$ battery supply as the main voltage for high power applications and another $12V$ battery supply for all logic and controlling components. This results in a 6S and 3S configuration of battery cells to closely match those voltages. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively. The conecept of using multiple battieres during normal operation in the rover, compared to single power source we be further addressed.
+    LiPo batteries feature a nominal voltage of around $3.7V$ per cell, depending on the exact type of internal chemistry. Higher output voltages are achieved by connecting several individual cells in series with each other, still being housed in the same battery enclosure. Therefore, the (series) cell count of a LiPo battery is a fundamental property of any LiPo battery and a direct measure for the expected output voltage. Usually, this property is indicated in the following way: "3S LiPo Battery", whereas "3S" is referring to a total series cell count of three. This results in a nominal voltage of around $11.1V$. For this exact reason, LiPo batteries can't be manufactured for an arbitrary output voltage and certain compromises must be made. The rover is built upon the idea of having a $24V$ battery supply as the main voltage for high power applications and another $12V$ battery supply for all logic and controlling components. This results in a 6S and 3S configuration of battery cells to closely match those voltages. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively. The conecept of using multiple battieres during normal operation in the rover, compared to single power source will be further addressed.
 
     \clearpage      
     
@@ -78,9 +78,9 @@
 
     \clearpage
     
-    \subsection{Basic Electric Layout}
+    \subsection{Basic electric layout}
 
-    While it would be possible to use DC/DC isolators whenever a ground loop could appear, it is more straight forward and easier to implement a complete different power solution. The main energy storage contains two unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. Additionally, the main fusing for the primary \& secondary battery can be found. The fuses protect the rover's circuitry as well as the batteries themselves. Due to the fact, that these components are strictly connected to the individual batteries, they change frequently with each battery exchange during normal operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. Afterwards, the power travels into two separate distribution and fusing circuits before supplying the actual components and voltage converters further down the line. To illustrate that, see the attached figure \ref{power_architecture}.
+    While it would be possible to use DC/DC isolators whenever a ground loop could appear, it is more straight forward and easier to implement a complete different power solution. The main energy storage contains the unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. Additionally, the main fusing for the primary \& secondary battery can be found here. The fuses protect the rover's circuitry as well as the batteries themselves. Due to the fact, that these components are strictly connected to the individual batteries, they change frequently with each battery exchange during normal operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. Afterwards, the power travels into two separate distribution and fusing circuits before supplying the actual components and voltage converters further down the line. To illustrate that, see the attached figure \ref{power_architecture}.
     
     \begin{figure}[h]
     \includegraphics[width=\textwidth]{contents/figures/power-architecture-v1.1.0.png}
@@ -90,18 +90,7 @@
 
     \clearpage
 
-    \subsection{Wiring Diagram}
-
-    \begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.1.png}
-    \caption{The wiring diagram incorporates several different aspects about how the rover is wired up. This includes individual cross-sections, voltages and physical location of connections. A detailed listing and legend is given in the follwowing pages.}
-    \label{wiring_power}
-    \end{figure}
-
-    \clearpage
-
-    \subsubsection{Voltage Rails}
+    \subsubsection{Voltage rails}
 
     The rover provides 4 different main voltage levels to the individual components. The primary and secondary LiPo batteries output the unregulated $24V$ and $12V$ power. This choice is based on the fact that those two voltages are quite common in the industry and are used in various fields of applications. As already mentioned, the $24V$ power rail is paired with all the devices demanding high power and therefore coming with a high current draw. Big currents always go hand in hand with the necessity of larger wire cross-sections, which results in increased costs, weight and more challenging wiring. This is a direct cause of "Ohm's Law". The total electrical power P is defined as $P_{Electrical}=U*I$. Using a higher voltage can help to tackle those problems due to lowering the overall flowing current, while also improving the total efficiency of the system as a side effect. Less power being dissipated in the form of heat is one cause of that, which can be calculated as $P_{Loss}=R*I^2$ . The best-case scenario would be close to no voltage regulating components at all, powering everything directly by the voltage the batteries supply on their own. This is however not always possible. Using a standardized supply voltage to determine what battery to use is a good approach to minimize the need of voltage converters and to keep the complexity low. While there exist components and systems for higher voltages like $48V$, they come with a significantly bigger problem when used in combination with battery power. The output power of a battery does not remain constant during a normal charge/discharge cycle. During normal operation, the voltage of each battery cell fluctuates at around $0.8V$. Pairing more battery cells in series also increases the absolute voltage difference between a fully charged and discharged battery. While components with internal voltage regulators may handle that without noticeable difference, others may be become unstable or get overloaded by the supply, depending on the remaining charge of the battery. Keeping the primary battery voltage at $24V$ is a good compromise between power efficiency and voltage stability. 
 
@@ -109,23 +98,50 @@
 
     Due to the fact the unregulated $12V$ rail is only used and intended for low-energy appliances to minimize complexity and load of the battery and secondary circuit, $12V$ is sufficient in this case. Also, this doubles as second native voltage source besides the primary supply. There is also a dedicated buck-converter for having a high power $12V$ rail to step down the $24V$ of the primary battery. That converter is used in combination with the servo-motors for steering the rover. This step was mandatory, because the servo-motors are not connected to another motor driver or similar circuit and are run directly by the voltage applied to their terminals. That will ensure a stable applied voltage and keeps a margin of flexibility of what type of servo-motors to use. 
 
+    \clearpage
+
+    \subsubsection{Wire cross-sections \& terminations}
+
     
 
-    \begin{table}[b]
+    
+    
+
+    \begin{table}[h]
         \centering
         \begin{tabular}{|r|r|r|r|r|} \hline 
-             color&  code &  cross-section&  equivalent to& ampacity\\ \hline 
-             white&  WH \#FFFFFF&  $0,5mm^2$&  21 AWG& 7 Amps\\ \hline 
-             black&  BK \#000000&  $1,5mm^2$&  16 AWG& 18 Amps\\ \hline 
-             grey&   GY \#808080&  $4,0mm^2$&  12 AWG& 30 Amps\\ \hline 
-             red&    RD \#FF0000&  $10,0mm^2$&  8 AWG& 55 Amps\\ \hline
+             color\footnotemark&  code\footnotemark &  cross-section\footnotemark&  equivalent to\footnotemark& ampacity\footnotemark \\ \hline 
+                          white&         WH \#FFFFFF&                   $0,5mm^2$&                      21 AWG&                7 Amps \\ \hline 
+                          black&         BK \#000000&                   $1,5mm^2$&                      16 AWG&               18 Amps \\ \hline 
+                           grey&         GY \#808080&                   $4,0mm^2$&                      12 AWG&               30 Amps \\ \hline 
+                            red&         RD \#FF0000&                  $10,0mm^2$&                       8 AWG&               55 Amps \\ \hline
         \end{tabular}
         \caption{Caption}
         \label{color_codes}
     \end{table}
+
+    \footnotetext{test}
+    \footnotetext{}
+    \footnotetext{}
+    \footnotetext{}
+
+
     
+    
+    \clearpage
 
+    \subsection{Wiring diagram}
 
+    The top level architecture of the Rover is shown below, and for clarity details such as connector types and current return cables have been ommited. Those will be shown in the detailed diagrams further on. 
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.1.png}
+    \caption{The wiring diagram incorporates several different aspects about how the rover is wired up. This includes the individual cross-sections, voltages and physical location of connections. A detailed listing and legend is given in the follwowing pages.}
+    \label{wiring_power}
+    \end{figure}
+
+    \clearpage
 
 
 \section{Energy Storage}
