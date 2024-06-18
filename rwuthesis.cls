@@ -48,21 +48,21 @@
 	}%
 }
 
-\DeclareTranslationFallback{rwuthesis-bachelor-thesis}{Bachlor Thesis}
-\DeclareTranslation{English}{rwuthesis-bachelor-thesis}{Bachelor Thesis}
-\DeclareTranslation{German}{rwuthesis-bachelor-thesis}{Bachelor-Thesis}
+\DeclareTranslationFallback{rwuthesis-bachelor-thesis}{In-depth safety assessment \& breakdown of rover design considerations}
+\DeclareTranslation{English}{rwuthesis-bachelor-thesis}{In-depth safety assessment \& breakdown of rover design considerations}
+\DeclareTranslation{German}{rwuthesis-bachelor-thesis}{In-depth safety assessment \& breakdown of rover design considerations}
 
-\DeclareTranslationFallback{rwuthesis-master-thesis}{Master Thesis}
-\DeclareTranslation{English}{rwuthesis-master-thesis}{Master Thesis}
-\DeclareTranslation{German}{rwuthesis-master-thesis}{Master-Thesis}
+\DeclareTranslationFallback{rwuthesis-master-thesis}{}
+\DeclareTranslation{English}{rwuthesis-master-thesis}{}
+\DeclareTranslation{German}{rwuthesis-master-thesis}{}
 
-\DeclareTranslationFallback{rwuthesis-degree-course}{Degree course:\n}
-\DeclareTranslation{English}{rwuthesis-degree-course}{Degree course:\n}
-\DeclareTranslation{German}{rwuthesis-degree-course}{Studiengang:\n}
+\DeclareTranslationFallback{rwuthesis-degree-course}{}
+\DeclareTranslation{English}{rwuthesis-degree-course}{}
+\DeclareTranslation{German}{rwuthesis-degree-course}{}
 
-\DeclareTranslationFallback{rwuthesis-faculty}{Faculty:\n}
-\DeclareTranslation{English}{rwuthesis-faculty}{Faculty:\n}
-\DeclareTranslation{German}{rwuthesis-faculty}{Fakultät:\n}
+\DeclareTranslationFallback{rwuthesis-faculty}{Faculty:}
+\DeclareTranslation{English}{rwuthesis-faculty}{Faculty:}
+\DeclareTranslation{German}{rwuthesis-faculty}{Fakultät:}
 
 \DeclareTranslationFallback{rwuthesis-reviewer-tablelayout}{@{}ll}
 \DeclareTranslation{English}{rwuthesis-reviewer-tablelayout}{@{}ll}
@@ -74,9 +74,9 @@
 \DeclareTranslation{English}{rwuthesis-second-reviewer}{Second Reviewer}
 \DeclareTranslation{German}{rwuthesis-second-reviewer}{2. & Gutachter}
 
-\DeclareTranslationFallback{rwuthesis-to-attain}{to attain the academic degree}
-\DeclareTranslation{English}{rwuthesis-to-attain}{to attain the academic degree}
-\DeclareTranslation{German}{rwuthesis-to-attain}{zur Erlangung des akademischen Grades}
+\DeclareTranslationFallback{rwuthesis-to-attain}{to attain academic accreditation for a scientific report}
+\DeclareTranslation{English}{rwuthesis-to-attain}{to attain academic accreditation for a scientific report}
+\DeclareTranslation{German}{rwuthesis-to-attain}{to attain academic accreditation for a scientific report}
 
 \DeclareTranslationFallback{rwuthesis-submitted-by}{submitted by}
 \DeclareTranslation{English}{rwuthesis-submitted-by}{submitted by}
