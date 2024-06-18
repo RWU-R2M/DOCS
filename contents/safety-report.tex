@@ -1,4 +1,4 @@
-\section{License}
+\section{Copyright Notice \& License}
 
     Copyright (C)  2024 Leandro Ebner. \\
     Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license can be found here:
@@ -6,7 +6,17 @@
 
     \begin{figure}[h!]
     \includegraphics{contents/figures/gfdl-logo.png}
-    \end{figure}     
+    \end{figure}
+
+    \vspace{5mm}
+    
+
+    This document is built using several packages originally developed by Stefan Gast for being compliant with RWU's corporate design. Due to fact that repository is archived now, an active fork is available for public at: \\
+    \href{https://github.com/leandroebner/latex-rwustyle}{https://github.com/leandroebner/latex-rwustyle} 
+
+    The source code to build this document, including all relevant information about the R2M project is available in a dedicated GitHub organization and actively maintained by it's contributors: \\
+    \href{https://github.com/RWU-R2M}{https://github.com/RWU-R2M}
+
     
 \section{Introduction}
 
@@ -16,9 +26,9 @@
 
     In addition to outlining essential safety protocols, this guide sets forth the minimum standards for both material and personal safety. These standards apply not only during the construction phase but also throughout the actual operation of all electronic components during the competition. To enhance understanding and clarity, it includes several schematics, data sheets, and detailed calculations. These resources are designed to provide a thorough illustration of the rover's internal architecture and functionality, making the document as informative and accessible as possible.
 
-    \begin{table}[b]
+    \begin{table}[b!]
         \centering
-        \begin{tabular}{|l|l|l|l|} \hline 
+        \begin{tabular}{|r|r|r|r|} \hline 
              Revision&  Date submitted& Summary of changes  &Authored \\ \hline 
              v1.0.0&  16.06.2024& Initial release  &Leandro Ebner \\ \hline
         \end{tabular}
@@ -40,7 +50,7 @@
     
 \section{Power Architecture}
 
-    The rover's power architecture is divided into two separate power systems. This approach ensures galvanic isolation between the power and logic components, which is necessary to eliminate any possible wiring configuration in which a so-called "ground loop" could form. The underlying problem is based on the fact that there exists an interface and thus an electrical connection between the individual components. While the communication between power and logic components is implemented by establishing a physical connection between their corresponding GPIO pins and reading different voltage levels, there must be a precise reference voltage available. Generally speaking, this is done by using a common ground. Hence, the most basic form to utilize that common ground connection is to form a "star ground." If there are multiple paths to ground, a "ground loop" is present. These ground loops, in combination with wire inductance, can cause issues for high-current electronics like our motor controllers (in this particular case utilizing ODrives). This is further illustrated in figure \ref{ground_loop_bad}.
+    The rover's power architecture is divided into two separate power systems. This approach ensures galvanic isolation between the power and logic components, which is necessary to eliminate any possible wiring configuration in which a so-called "ground loop" could form. The underlying problem is based on the fact that there exists an interface and thus an electrical connection between the individual components. While the communication between power and logic components is implemented by establishing a physical connection between their corresponding GPIO pins and reading different voltage levels, there must be a precise reference voltage available at any given point in time. Generally speaking, this is done by using a common ground. Hence, the most basic form to utilize that common ground connection is to form a "star ground." If there are multiple paths to ground, a "ground loop" is present. These ground loops, in combination with wire inductance, can cause issues for high-current electronics like the rover's motor controllers (in this particular case utilizing ODrives). This is further illustrated in figure \ref{ground_loop_bad}.
     
     \begin{figure}[h]
     \includegraphics[width=\textwidth]{contents/figures/ground_loop_bad.png}
@@ -68,21 +78,39 @@
     \clearpage
     \subsection{Basic Electric Layout}
 
-    The main energy storage contains two unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. Additionally, this area is where the main battery fusing for the primary and secondary batteries can be found. The fuses protect the rover's circuitry by breaking the connection in case of an overload or short circuit. Due to the fact that these components are strictly connected to the individual batteries, they change frequently and are the actual part where batteries will be swapped during regular operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. Afterwards, the power travels into two seperate distribution and fusing parts before supplying the actual components and voltage converters further down the line.
+    The main energy storage contains two unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. Additionally, the main fusing for the primary \& secondary battery can be found. The fuses protect the rover's circuitry as well as the batteries themselves. Due to the fact, that these components are strictly connected to the individual batteries, they change frequently with each battery exchange during normal operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. Afterwards, the power travels into two separate distribution and fusing circuits before supplying the actual components and voltage converters further down the line.
     
     \begin{figure}[h]
     \includegraphics[width=\textwidth]{contents/figures/power-architecture-v1.1.0.png}
     \caption{Basic electrical layout split in the main 4 categories. Each category serves a different purpose (i.e. safely distributing the power or connecting the individual components).}
     \label{power_architecture}
     \end{figure}
-    
-    
-    \clearpage
-    \begin{figure}
 
-        \includegraphics[width=\textwidth]{contents/figures/wiring-diagram-p-v1.1.0.png}
+    \clearpage
+
+    
+
+    
+    \begin{table}
+        \centering
+        \begin{tabular}{|r|r|r|r|r|} \hline 
+             color&  code &  cross-section&  equivalent to& ampacity\\ \hline 
+             white&  WH \#FFFFFF&  $0,5mm^2$&  21 AWG& 7 Amps\\ \hline 
+             black&  BK \#000000&  $1,5mm^2$&  16 AWG& 18 Amps\\ \hline 
+             grey&   GY \#808080&  $4,0mm^2$&  12 AWG& 30 Amps\\ \hline 
+             red&    RD \#FF0000&  $10,0mm^2$&  8 AWG& 55 Amps\\ \hline
+        \end{tabular}
         \caption{Caption}
-        \label{wiring_power}
+        \label{color-codes}
+    \end{table}
+
+    \clearpage
+
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.0.png}
+    \caption{tst}
+    \label{wiring_power}
     \end{figure}
 
     
