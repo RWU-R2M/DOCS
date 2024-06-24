@@ -97,11 +97,13 @@
 
     Due to the fact the unregulated $12V$ rail is only used and intended for low-energy appliances to minimize complexity and load of the battery and secondary circuit, $12V$ is sufficient in this case. Also, this doubles as second native voltage source besides the primary supply. There is also a dedicated buck-converter for having a high power $12V$ rail to step down the $24V$ of the primary battery. That converter is used in combination with the servo-motors for steering the rover. This step was mandatory, because the servo-motors are not connected to another motor driver or similar circuit and are run directly by the voltage applied to their terminals. That will ensure a stable applied voltage and keeps a margin of flexibility of what type of servo-motors to use. 
 
-    \clearpage
+    \clearpage %PAGE SPECIFIER
 
     \subsection{Wire cross-sections \& terminations}
 
-    All the wires can be classified into four different groups. There is one type of wire only used for carrying signals, thus having the smallest cross-section of all of them. For power-carrying wires, you can sort them into three different groups, reaching from low, medium and high current wires. According to the table \ref{color_codes}, they are $1.5mm^2$, $4.0mm^2$ and $10.0mm^2$ in area. As one might expect, all cables can come in various colors and there is no fixed internal guideline what those colors may represent. The rover's wiring sticks to common conventions for marking positive, negative and auxiliary wires in descrete colors always. To easily tell and differentiate the cross-sections of arbitrary cables, a predefined color-code for each wire gauge has been set. Those are oriented in respect to the new "DIN 46228" by also making use of the normed abbreviations of the "IEC 60757" standard. White coding marks signalling wires, black coding low power wires, grey and red codes are therefore reserved for medium and high current wires. For terminating the wires, either wire ferrules or nylon connectors have been used. Only "DIN 46228" compliant wire ferrules are used in the rover, sticking to our already existing color scheme. For power connectors, there is a selection of three nylon based connectors named "XT30", "XT60" and "XT90". Their current rating in the same order reaches from $15A$, $30A$ to $45A$. The rating of the connector naming scheme refers to an approved short burst current up to twice of their constant current rating.  
+    All the wires can be classified into four different groups. There is one type of wire only used for carrying signals, thus having the smallest cross-section of all of them. For power-carrying wires, you can sort them into three different groups, reaching from low, medium and high current wires. According to the table \ref{color_codes}, they are $1.5mm^2$, $4.0mm^2$ and $10.0mm^2$ in area. As one might expect, all cables can come in various colors and there is no fixed internal guideline what those colors may represent. The rover's wiring sticks to common conventions for marking positive, negative and auxiliary wires in descrete colors always. To easily tell and differentiate the cross-sections of arbitrary cables, a predefined color-code for each wire gauge has been set. Those are oriented in respect to the new "DIN 46228" by also making use of the normed abbreviations of the "IEC 60757" standard. White coding marks signalling wires, black coding low power wires, grey and red codes are therefore reserved for medium and high current wires. For terminating the wires, either wire ferrules or nylon connectors have been used. Only "DIN 46228" compliant wire ferrules are used in the rover, sticking to our already existing color scheme. For power connectors, there is a selection of three nylon based connectors named "XT30", "XT60" and "XT90". Their current rating in the same order reaches from $15A$, $30A$ to $40A$. The rating of the connector naming scheme refers to an approved short burst current up to twice of their constant current rating.  
+
+    \vspace{5mm} %VERTICAL SPACE
     
     \begin{table}[h] %Float specifier check: passed!
         \centering
@@ -121,20 +123,20 @@
     \footnotetext[3]{Cross-section according to \textbf{IEC 60228}}
     \footnotetext[4]{Ampacity according to \textbf{NFPA 70, Table 310.15(B)(16)}}
 
-    \clearpage
+    \clearpage %PAGE SPECIFIER
 
     \subsection{Wiring diagram}
 
     The top level architecture of the Rover is shown below, and for clarity details such as connector types and current return cables have been ommited. Those will be shown in the detailed diagrams further on. 
 
-    \begin{figure}[h]
+    \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.1.png}
     \caption{The wiring diagram incorporates several different aspects about how the rover is wired up. This includes the individual cross-sections, voltages and physical location of connections. A detailed listing and legend is given in the follwowing pages.}
     \label{wiring_power}
     \end{figure}
 
-    \clearpage
+    \clearpage %PAGE SPECIFIER
 
 
 \section{Energy Storage}
