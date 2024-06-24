@@ -47,7 +47,7 @@
 
     \clearpage %PAGE SPECIFIER   
     
-\section{Power Design Choice}
+\section{Power Design Illustration}
 
     The rover's power architecture is divided into two separate power systems. This approach ensures galvanic isolation between the power and logic components, which is necessary to eliminate any possible wiring configuration in which a so-called "ground loop" could form. The underlying problem is based on the fact that there exists an interface and thus an electrical connection between the individual components. While the communication between power and logic components is implemented by establishing a physical connection between their corresponding GPIO pins and reading different voltage levels, there must be a precise reference voltage available at any given point in time. Generally speaking, this is done by using a common ground. Hence, the most basic form to utilize that common ground connection is to form a "star ground." If there are multiple paths to ground, a "ground loop" is present. These ground loops, in combination with wire inductance, can cause issues for high-current electronics like the rover's motor controllers (in this particular case utilizing ODrives). This is further illustrated in figure \ref{ground_loop_bad}.
     
@@ -99,24 +99,26 @@
 
     \clearpage %PAGE SPECIFIER
 
-    \subsection{Wire cross-sections \& terminations}
+    \subsection{Wire cross-sections}
 
-    All the wires can be classified into four different groups. There is one type of wire only used for carrying signals, thus having the smallest cross-section of all of them. For power-carrying wires, you can sort them into three different groups, reaching from low, medium and high current wires. According to the table \ref{color_codes}, they are $1.5mm^2$, $4.0mm^2$ and $10.0mm^2$ in area. As one might expect, all cables can come in various colors and there is no fixed internal guideline what those colors may represent. The rover's wiring sticks to common conventions for marking positive, negative and auxiliary wires in descrete colors always. To easily tell and differentiate the cross-sections of arbitrary cables, a predefined color-code for each wire gauge has been set. Those are oriented in respect to the new "DIN 46228" by also making use of the normed abbreviations of the "IEC 60757" standard. White coding marks signalling wires, black coding low power wires, grey and red codes are therefore reserved for medium and high current wires. For terminating the wires, either wire ferrules or nylon connectors have been used. Only "DIN 46228" compliant wire ferrules are used in the rover, sticking to our already existing color scheme. For power connectors, there is a selection of three nylon based connectors named "XT30", "XT60" and "XT90". Their current rating in the same order reaches from $15A$, $30A$ to $40A$. The rating of the connector naming scheme refers to an approved short burst current up to twice of their constant current rating.  
-
-    \vspace{5mm} %VERTICAL SPACE
+    All the wires can be classified into four different groups. There is one type of wire only used for carrying signals, thus having the smallest cross-section of all of them. For power-carrying wires, you can sort them into three different groups, reaching from low, medium to high current wires. According to the table \ref{color_codes}, they are $1.5mm^2$, $4.0mm^2$ and $10.0mm^2$ in area. As one might expect, all cables can come in various colors and there is no fixed internal guideline what those colors may represent. The rover's wiring sticks to common conventions for marking positive, negative and auxiliary wires in descrete colors always. To easily tell and differentiate the cross-sections of arbitrary cables, a predefined color-code for each wire type has been set. Those are oriented in respect to the new "DIN 46228" by also making use of the normed abbreviations of the "IEC 60757" standard. White coding marks signal wires, black coding low power wires, grey and red codes are reserved for medium and high current wires. The ampacity per wire also documented in table \ref{color_codes} below.
     
-    \begin{table}[h] %Float specifier check: passed!
+    %\vspace{5mm} %VERTICAL SPACE
+    
+    \begin{table}[h] %Float specifier check: passed! 
         \centering
         \begin{tabular}{|r|r|r|r|r|} \hline 
-          color\footnotemark[1]& code\footnotemark[2]& cross-section\footnotemark[3]&  equivalent to\footnotemark[4]& ampacity\footnotemark[5] \\ \hline 
-                          white&          WH \#FFFFFF&                    $0.5mm^2$&                          21 AWG&                7 Amps    \\ \hline 
-                          black&          BK \#000000&                    $1.5mm^2$&                          16 AWG&               18 Amps    \\ \hline 
-                           grey&          GY \#808080&                    $4.0mm^2$&                          12 AWG&               30 Amps    \\ \hline 
-                            red&          RD \#FF0000&                   $10.0mm^2$&                           8 AWG&               55 Amps    \\ \hline
+          color\footnotemark[1]&  code\footnotemark[2] \& HEX format&  cross-section\footnotemark[3]&  equivalent to&  ampacity\footnotemark[4] \\ \hline 
+                          white&          WH \#FFFFFF&                    $0.5mm^2$&                          21 AWG&                 7 Amps    \\ \hline 
+                          black&          BK \#000000&                    $1.5mm^2$&                          16 AWG&                18 Amps    \\ \hline 
+                           grey&          GY \#808080&                    $4.0mm^2$&                          12 AWG&                30 Amps    \\ \hline 
+                            red&          RD \#FF0000&                   $10.0mm^2$&                           8 AWG&                55 Amps    \\ \hline
         \end{tabular}
-        \caption{Caption}
+        \caption{Internal R2M guideline defines a fixed set of wires to choose from. The outline ensure consistency and reduces overall complexity. Optionally, those connections can be furthermore labeled with text and color.}
         \label{color_codes}
     \end{table}
+
+    Instead of using a generic ampacity-table in the same fashion CSTAG provided an \href{https://web.archive.org/web/20230310184047/https://www.coonerwire.com/amp-chart/}{\textbf{\underline{example}}}, the current-values have been calculated for the case of 2 or 3 conductors together in a raceway, conduit, or cable. The given example was refering to a single conductor in free air. This scenario is much less realistic in real-life applications while also providing less headroom if the wiring is done differently. The ampacity in table \ref{color_codes} holds true for an insulation temperature up to 90°C in respect to an ambient temperature of 30°C. The ambient temperature in Drumheller in summer is close to 40°C, and needs to be accounted. This correction should also address the fact that the temperature inside the rover is likely 20°C higher than outdoors, depending on cooling strategies, rover material, paint colour, and other factors. For a total ambient temperature up to $\Delta T_{max} = 30K$, a factor as low as $\lambda = 0.71$ as stated in the "NFPA 70" can be applied.
 
     \footnotetext[1]{Ferrule colors according to \textbf{DIN 46228}}
     \footnotetext[2]{Color abbreviations according to \textbf{IEC 60757}}
@@ -125,11 +127,18 @@
 
     \clearpage %PAGE SPECIFIER
 
+    \subsection{Power connectors \& wire termination}
+
+    
+    For terminating the wires, either wire ferrules or nylon (polyamide) connectors have been used. Only "DIN 46228" compliant wire ferrules are used in the rover, sticking to our already existing color scheme. Also, by following the DIN norm, the ferrules will always be suited for the current related to the cross section theya are terminating. Similar to the set of wires and wire ferrules, power connectors have been chosen beforehand to follow the electrical requirements. There is a selection of three nylon (polyamide) based connectors named "XT30" (see \ref{xt30}), "XT60" (see \ref{xt60}) and "XT90" (see \ref{xt90}). Their current rating in the same order reaches from $15A$, $30A$ to $40A$. The rating of the connector naming scheme refers to an approved short burst current up to twice of their constant current rating. Further information can be extracted in the appendix.
+
+    \clearpage %PAGE SPECIFIER
+
     \subsection{Wiring diagram}
 
     The top level architecture of the Rover is shown below, and for clarity details such as connector types and current return cables have been ommited. Those will be shown in the detailed diagrams further on. 
 
-    \begin{figure}[ht]
+    \begin{figure}[h!]
     \centering
     \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.1.png}
     \caption{The wiring diagram incorporates several different aspects about how the rover is wired up. This includes the individual cross-sections, voltages and physical location of connections. A detailed listing and legend is given in the follwowing pages.}
@@ -157,6 +166,6 @@
 
 
 
+https://web.archive.org/web/20230310184047/https://www.coonerwire.com/amp-chart/
 
-
-
+for 2 or 3 conductors together in a raceway, conduit, or cable,single conductor in free air
