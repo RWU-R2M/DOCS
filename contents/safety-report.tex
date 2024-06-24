@@ -49,12 +49,12 @@
     
 \section{Power Design Choice}
 
-    The rover's power architecture is divided into two separate power systems. This approach ensures galvanic isolation between the power and logic components, which is necessary to eliminate any possible wiring configuration in which a so-called "ground loop" could form. The underlying problem is based on the fact that there exists an interface and thus an electrical connection between the individual components. While the communication between power and logic components is implemented by establishing a physical connection between their corresponding GPIO pins and reading different voltage levels, there must be a precise reference voltage available at any given point in time. Generally speaking, this is done by using a common ground. Hence, the most basic form to utilize that common ground connection is to form a "star ground." If there are multiple paths to ground, a "ground loop" is present. These ground loops, in combination with wire inductance, can cause issues for high-current electronics like the rover's motor controllers (in this particular case utilizing ODrives). This is further illustrated in figure \ref{fig:ground_loop_bad}.
+    The rover's power architecture is divided into two separate power systems. This approach ensures galvanic isolation between the power and logic components, which is necessary to eliminate any possible wiring configuration in which a so-called "ground loop" could form. The underlying problem is based on the fact that there exists an interface and thus an electrical connection between the individual components. While the communication between power and logic components is implemented by establishing a physical connection between their corresponding GPIO pins and reading different voltage levels, there must be a precise reference voltage available at any given point in time. Generally speaking, this is done by using a common ground. Hence, the most basic form to utilize that common ground connection is to form a "star ground." If there are multiple paths to ground, a "ground loop" is present. These ground loops, in combination with wire inductance, can cause issues for high-current electronics like the rover's motor controllers (in this particular case utilizing ODrives). This is further illustrated in figure \ref{ground_loop_bad}.
     
     \begin{figure}[h] %Float specifier check: passed!
         \includegraphics[width=\textwidth]{contents/figures/ground_loop_bad.png}
         \caption{Ground loop causes current flow $I_{Injected}$.}
-        \label{fig:ground_loop_bad}
+        \label{ground_loop_bad}
     \end{figure}
     
     The issue is the inductance of the power wires between the motor controllers and the battery. This inductance, coupled with the high current drawn by the motor controllers, causes $V_1$ to be different as $V_2$, leading to potential mismatch in the voltage levels. As the motor controllers demand substantial current, the wire inductance can generate significant voltage drops along the power lines. If the voltage caused by the wire inductance and current is high enough, the $0-5V$ GPIO signals can swing much higher or lower than the defined voltage range, potentially exceeding safe operational limits. These fluctuations in voltage can introduce erratic behavior in the control system, compromising the performance and reliability of the motor controllers. This causes a current to flow through the ODrives GPIO pins, which can lead to unintended electrical noise and potential damage to sensitive electronic components.
@@ -67,24 +67,24 @@
     
     \subsection{Galvanic isolation}
     
-    To completely minimize the possibility of creating ground loops by accident, the loop must be broken. This can be achieved by isolating the power supplies (no common ground) and connecting a dedicated signal ground between the logic and power electronics. An example of this is a single motor controller connected to a battery and a device like a Raspberry Pi connected to a different battery. It is possible to achieve the same functionality with a DC/DC isolator as shown in figure \ref{fig:ground_loop_fix}. By isolating the data connection (whether it is GPIO, USB, or UART, etc.), the ground loop is broken.
+    To completely minimize the possibility of creating ground loops by accident, the loop must be broken. This can be achieved by isolating the power supplies (no common ground) and connecting a dedicated signal ground between the logic and power electronics. An example of this is a single motor controller connected to a battery and a device like a Raspberry Pi connected to a different battery. It is possible to achieve the same functionality with a DC/DC isolator as shown in figure \ref{ground_loop_fix}. By isolating the data connection (whether it is GPIO, USB, or UART, etc.), the ground loop is broken.
     
     \begin{figure}[h] %Float specifier check: passed!
         \includegraphics[width=\textwidth]{contents/figures/ground_loop_fix.png}
         \caption{Mismatched voltage levels wont introduce unwanted current flows.}
-        \label{fig:ground_loop_fix}
+        \label{ground_loop_fix}
     \end{figure}
 
     \clearpage %PAGE SPECIFIER
     
 \section{Basic Electric Layout}
 
-    While it would be possible to use DC/DC isolators whenever a ground loop could appear, it is more straight forward and easier to implement a complete different power solution. The main energy storage contains the unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. Additionally, the main fusing for the primary \& secondary battery can be found here. The fuses protect the rover's circuitry as well as the batteries themselves. Due to the fact, that these components are strictly connected to the individual batteries, they change frequently with each battery exchange during normal operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. Afterwards, the power travels into two separate distribution and fusing circuits before supplying the actual components and voltage converters further down the line. To illustrate that, see the attached figure \ref{fig:power_architecture}.
+    While it would be possible to use DC/DC isolators whenever a ground loop could appear, it is more straight forward and easier to implement a complete different power solution. The main energy storage contains the unregulated $24V$ (6S) and $12V$ (3S) power sources in the form of LiPo batteries. This part of the rover also integrates a dedicated battery management system (further referred to as BMS) for each battery. Additionally, the main fusing for the primary \& secondary battery can be found here. The fuses protect the rover's circuitry as well as the batteries themselves. Due to the fact, that these components are strictly connected to the individual batteries, they change frequently with each battery exchange during normal operation. This means that during missions, the batteries can be quickly replaced without affecting other parts of the rover. Therefore, this area is separated from other areas of the rover's wiring as it is the only region where connections and disconnections of components are allowed. This separation is crucial to avoid accidental disconnections that could affect the rover's operation or create potential risks by introducing faulty connections. The output of both batteries is directly fed into an emergency stop system. Afterwards, the power travels into two separate distribution and fusing circuits before supplying the actual components and voltage converters further down the line. To illustrate that, see the attached figure \ref{power_architecture}.
     
     \begin{figure}[h] %Float specifier check: passed!
         \includegraphics[width=\textwidth]{contents/figures/power-architecture-v1.1.0.png}
         \caption{Basic electrical layout split in the main 4 categories. Each category serves a different purpose (in example safely distributing the power or connecting the individual components with each other).}
-         \label{fig:power_architecture}
+         \label{power_architecture}
     \end{figure}
 
     \clearpage %PAGE SPECIFIER
@@ -101,16 +101,16 @@
 
     \subsection{Wire cross-sections \& terminations}
 
-    All the wires can be classified into four different groups. There is one type of wire only used for carrying signals, thus having the smallest cross-section of all of them. For power-carrying wires, you can sort them into three different groups, reaching from low, medium and high current wires. According to the table \ref{color_codes}, they are $1.5mm^2$, $4.0mm^2$ and $10.0mm^2$ in area. As one might expect, all cables can come in various colors and there is no fixed internal guideline what those colors may represent. The rover's wiring sticks to common advice for marking positive, negative and auxiliary wires in descrete colors always. To easily tell and differentiate the cross-sections of arbitrary cables, a predefined color-code for each wire gauge has been set. Those are oriented in respect to the new "DIN 46228" by also making use of the normed abbreviations of the "IEC 60757" standard. White coding marks signalling wires, black coding low power wires, grey and red codes are therefore reserved for medium and high current wires. For terminating the wires, either wire ferrules or nylon connectors have been used. Only "DIN 46228" compliant wire ferrules are used in the rover, sticking to our already existing color scheme. For power connectors, there is a selection of three nylon based connectors named "XT30", "XT60" and "XT90". Their current rating in the same order reaches from $15A$, $30A$ to $45A$. The rating of the connector naming scheme refers to an approved short burst current up to twice of their constant current rating.  
+    All the wires can be classified into four different groups. There is one type of wire only used for carrying signals, thus having the smallest cross-section of all of them. For power-carrying wires, you can sort them into three different groups, reaching from low, medium and high current wires. According to the table \ref{color_codes}, they are $1.5mm^2$, $4.0mm^2$ and $10.0mm^2$ in area. As one might expect, all cables can come in various colors and there is no fixed internal guideline what those colors may represent. The rover's wiring sticks to common conventions for marking positive, negative and auxiliary wires in descrete colors always. To easily tell and differentiate the cross-sections of arbitrary cables, a predefined color-code for each wire gauge has been set. Those are oriented in respect to the new "DIN 46228" by also making use of the normed abbreviations of the "IEC 60757" standard. White coding marks signalling wires, black coding low power wires, grey and red codes are therefore reserved for medium and high current wires. For terminating the wires, either wire ferrules or nylon connectors have been used. Only "DIN 46228" compliant wire ferrules are used in the rover, sticking to our already existing color scheme. For power connectors, there is a selection of three nylon based connectors named "XT30", "XT60" and "XT90". Their current rating in the same order reaches from $15A$, $30A$ to $45A$. The rating of the connector naming scheme refers to an approved short burst current up to twice of their constant current rating.  
     
-    \begin{table}[h]
+    \begin{table}[h] %Float specifier check: passed!
         \centering
         \begin{tabular}{|r|r|r|r|r|} \hline 
           color\footnotemark[1]& code\footnotemark[2]& cross-section\footnotemark[3]&  equivalent to\footnotemark[4]& ampacity\footnotemark[5] \\ \hline 
-                          white&          WH \#FFFFFF&                    $0,5mm^2$&                          21 AWG&                7 Amps    \\ \hline 
-                          black&          BK \#000000&                    $1,5mm^2$&                          16 AWG&               18 Amps    \\ \hline 
-                           grey&          GY \#808080&                    $4,0mm^2$&                          12 AWG&               30 Amps    \\ \hline 
-                            red&          RD \#FF0000&                   $10,0mm^2$&                           8 AWG&               55 Amps    \\ \hline
+                          white&          WH \#FFFFFF&                    $0.5mm^2$&                          21 AWG&                7 Amps    \\ \hline 
+                          black&          BK \#000000&                    $1.5mm^2$&                          16 AWG&               18 Amps    \\ \hline 
+                           grey&          GY \#808080&                    $4.0mm^2$&                          12 AWG&               30 Amps    \\ \hline 
+                            red&          RD \#FF0000&                   $10.0mm^2$&                           8 AWG&               55 Amps    \\ \hline
         \end{tabular}
         \caption{Caption}
         \label{color_codes}
@@ -120,9 +120,7 @@
     \footnotetext[2]{Color abbreviations according to \textbf{IEC 60757}}
     \footnotetext[3]{Cross-section according to \textbf{IEC 60228}}
     \footnotetext[4]{Ampacity according to \textbf{NFPA 70, Table 310.15(B)(16)}}
-    
 
-    
     \clearpage
 
     \subsection{Wiring diagram}
