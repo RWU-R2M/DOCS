@@ -1,0 +1,52 @@
+\section{Appendix}
+\subsection{Definitions}
+
+    \begin{enumerate}
+        \item The word \textit{should} indicates a suggestion which may become a requirement in future competitions.
+        \item A \textit{circuit} is one or more electricity-consuming devices (and the connections between them) which draw current from a single power source through a common \textit{circuit protection} element.
+        \item \textit{Regulators} consume and provide power, with their input and outputs counting as at least one \textit{circuit} each.
+        \item The \textit{current rating} of a component is the manufacturer-published value indicating the maximum acceptable amperage consumed or provided by the device in normal continuous conditions. Transient, burst, or peak current limits are \textbf{not} \textit{current ratings}.
+        \item The \textit{current rating} of \textit{circuit protection} is the amperage above which it is designed to interrupt current flow.
+        \item \textit{Circuit protection} is a fuse or electromechanical circuit-breaker which reliably interrupts excessive current flows through a connected \textit{circuit}. Software-based solutions are \textbf{insufficient}. Motor controllers, power regulators, or other devices with current limiting capabilities are \textbf{not} sufficient for use as \textit{circuit protection}. Self-resetting fuses are also \textbf{insufficient}.
+        \item A \textit{kill switch} is a physical switch mounted on a rover which, when pressed down, causes the interruption of power to \textbf{all} rover systems until the switch is manually reset.
+    \end{enumerate}
+
+    \clearpage %PAGE SPECIFIER
+    
+    \subsection{Requirements}
+
+    \begin{enumerate}
+
+    % 1 -------------------------------------------------------------------------------------------------------------------------------------------
+    \item Rovers must not include any flammable, environmentally damaging, or otherwise hazardous liquids or gasses, except:
+    \begin{enumerate}
+        \item Within a permanently sealed component such as a battery; \label{battery}
+        \item Commercially-available lubricants as required by mechanical assemblies, where care is taken to avoid overuse and contamination.
+    \end{enumerate}
+    %   -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    % 4 -------------------------------------------------------------------------------------------------------------------------------------------
+    \item Each circuit must include separate circuit protection.
+    \begin{enumerate}
+        \item The current rating of the devices powered by the circuit, or 2 Amps for lower-current circuits;
+        \item The safe current-carrying capacity of the smallest connectors or conductors in the circuit.
+        \item The connections between your battery and any distribution board/panel are a circuit, and must be protected as such. Off the shelf battery management systems (BMSs) are allowable here, and are the only exception to the ban on protection systems that rely on software.
+    \end{enumerate}
+    %   -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    % 7 -------------------------------------------------------------------------------------------------------------------------------------------
+    \item Sufficient documentation must be provided to prove the safety of your rover before you will be allowed to compete.
+    \begin{enumerate}
+        \item The documentation diagram should be updated to reflect ongoing changes during CIRC. \label{req7.5}
+        \item Related low-current devices (less than 2A total) on the same circuit may be grouped into black-box subsystems to reduce the complexity of the diagram.
+        \item Each power source, circuit protection element, circuit, and device/device group in your documentation on the diagram must be identified annotated with a short name and current rating.
+        \item A photograph of the emergency stop button mounted on the rover must be included.
+    \end{enumerate}
+    %   -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    \end{enumerate}
+
+
