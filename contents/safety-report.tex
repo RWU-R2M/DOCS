@@ -10,7 +10,7 @@
 
     \vspace{5mm} %VERTICAL SPACE
     
-    This document is built using several packages originally developed by Stefan Gast for being compliant with RWU's corporate design. Due to fact that repository is archived now, an active fork is available for public at: \\
+    This document is built using several packages originally developed by Stefan Gast for being compliant with RWU's corporate design. Due to the fact that repository is archived now, an active fork is available for public at: \\
     \href{https://github.com/leandroebner/latex-rwustyle}{https://github.com/leandroebner/latex-rwustyle} 
 
     The source code to build this document, including all relevant information about the R2M project is available in a dedicated GitHub organization and actively maintained by its contributors: \\
@@ -27,9 +27,9 @@
     \begin{table}[b!] %Float specifier check: passed!
         \centering
         \begin{tabular}{|r|r|r|r|} \hline %MUST REMAIN "R" TO BE COMPLIANT WITH INITAL RELEASE ON GITHUB. DO NOT CHANCE!!
-             Revision& Date submitted& Summary of changes&                   Authored      \\ \hline 
-             v1.1.0&   23.06.2024&     1st CSTAG evalution&                  Leandro Ebner \\ \hline 
-             v1.0.0&   16.06.2024&     Initial release&                      Leandro Ebner \\ \hline
+             Revision& Date submitted& Summary of changes&  Authored      \\ \hline 
+             v1.1.0&   23.06.2024&     1st CSTAG evalution& Leandro Ebner \\ \hline 
+             v1.0.0&   16.06.2024&     Initial release&     Leandro Ebner \\ \hline
         \end{tabular}
     \end{table}
 
@@ -39,11 +39,11 @@
 
     \subsection{Batteries}
     
-    The rover is using two lithium-polymer based batteries (further referred to as LiPo batteries) to power all the electronics. Batteries, in general, are compliant with the regulations set by the CIRC (see \ref{battery} of the appendix) as long as they are sealed and follow certain safety guidelines. LiPo batteries are designed as permanently sealed units, which contain their electrolytes within durable casing materials. This prevents the escape of hazardous substances under normal operating conditions. This cell chemistry is widely used in consumer electronics, remote-controlled vehicles, and other devices where safety and environmental compliance are critical and high electrical characteristics are required. This demonstrates their reliability and safety under proper use and are known for a high energy density as well as output power capability. For this reason, the LiPo cell chemistry was also utilized for energy storage in the rover.
+    The rover is using two lithium-polymer based batteries (further referred to as LiPo batteries) to power all the electronics. Batteries, in general, are compliant with the regulations set by the CIRC (see \ref{battery} of the appendix) as long as they are sealed and follow certain safety guidelines (i.e. using battery-management-systems to ensure usage within of manufacturer-specifications). LiPo batteries are designed as permanently sealed units, which contain their electrolytes within durable casing materials. This prevents the escape of hazardous substances under normal operating conditions. This cell chemistry is widely used in consumer electronics, remote-controlled vehicles, and other devices where safety and environmental compliance are critical and high electrical characteristics are required. This demonstrates their reliability and safety under proper use and are known for a high energy density as well as output power capability. For this reason, the LiPo cell chemistry was also utilized for energy storage in the rover.
     
     \vspace{5mm} %VERTICAL SPACE
     
-    LiPo batteries feature a nominal voltage of around $3.7V$ per cell, depending on the exact type of internal chemistry. Higher output voltages are achieved by connecting several individual cells in series with each other, still being housed in the same battery enclosure. Therefore, the (series) cell count of a LiPo battery is a fundamental property of any LiPo battery and a direct measure for the expected output voltage. Usually, this property is indicated in the following way: "3S LiPo Battery", whereas "3S" is referring to a total series cell count of three. This results in a nominal voltage of around $11.1V$. For this exact reason, LiPo batteries can't be manufactured for an arbitrary output voltage and certain compromises must be made. The rover is built upon the idea of having a $24V$ battery supply as the main voltage for high power applications and another $12V$ battery supply for all logic and controlling components. This results in a 6S and 3S configuration of battery cells to closely match those voltages. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively. The concept of using multiple batterers during normal operation in the rover, compared to single power source will be further addressed.
+    LiPo batteries feature a nominal voltage of around $3.7V$ per cell, depending on the exact type of internal chemistry. Higher output voltages are achieved by connecting several individual cells in series with each other, still being housed in the same battery enclosure. Therefore, the (series) cell count of a LiPo battery is a fundamental property of any LiPo battery and a direct measure for the expected output voltage. Usually, this property is indicated in the following way: "3S LiPo Battery", whereas "3S" is referring to a total series cell count of three. This results in a nominal voltage of around $11.1V$. For this exact reason, LiPo batteries can't be manufactured for an arbitrary output voltage and certain compromises must be made. The rover is built upon the idea of having a $24V$ battery supply as the main voltage for high power applications and another $12V$ battery supply for all logic and controlling components. This results in a 6S and 3S configuration of battery cells to closely match those voltages. Those common naming conventions must be known to safely work with batteries, including charging/discharging them in a safe manner. Detailed information about the two batteries used in the rover can be found in their datasheet \ref{prim-battery} and \ref{sec-battery} respectively. The concept of using multiple batteries during normal operation in the rover compared to single power source will be further addressed.
 
     \clearpage %PAGE SPECIFIER   
     
@@ -103,8 +103,6 @@
 
     All the wires can be classified into four different groups. There is one type of wire only used for carrying signals, thus having the smallest cross-section of all of them. For power-carrying wires, you can sort them into three different groups, reaching from low, medium to high current wires. According to the table \ref{color_codes}, they are $1.5mm^2$, $4.0mm^2$ and $10.0mm^2$ in area. As one might expect, all cables can come in various colors and there is no fixed internal guideline what those colors may represent. The rover's wiring sticks to common conventions for marking positive, negative and auxiliary wires in descrete colors always. To easily tell and differentiate the cross-sections of arbitrary cables, a predefined color-code for each wire type has been set. Those are oriented in respect to the new "DIN 46228" by also making use of the normed abbreviations of the "IEC 60757" standard. White coding marks signal wires, black coding low power wires, grey and red codes are reserved for medium and high current wires. The ampacity per wire also documented in table \ref{color_codes} below.
     
-    %\vspace{5mm} %VERTICAL SPACE
-    
     \begin{table}[h] %Float specifier check: passed! 
         \centering
         \begin{tabular}{|r|r|r|r|r|} \hline 
@@ -144,35 +142,39 @@
 
     \subsection{Wiring diagram}
 
-    The top level architecture of the rover can be found on the next page. For clarity, details such as connector types and current return cables have been omitted and will be shown in the smaller fractions further on within this document. As already mentioned, the diagrams group several parts into discrete blocks/areas, to make it look more structured at a glance. Compared to the power architecture (see figure \ref{power_architecture}), which is just a general way of showing the composition of electronics, the wiring diagram provides information about the voltage supplied by the wire (and differentiating between regulated and unregulated supplies), the cross section it has and for what connection it is set-in. 
+    The top level architecture of the rover can be found on the next page (figure \ref{wiring_diagram}). For clarity, details such as connector types and current return cables have been omitted and will be shown in the smaller fractions further on within this document. As already mentioned, the diagrams group several parts into discrete blocks/areas, to make it look more structured at a glance. Compared to the power architecture (see figure \ref{power_architecture}), which is just a general way of showing the composition of electronics, the wiring diagram (table \ref{wiring_diagram_legend}) provides information about the voltage supplied by the wire (and differentiates between regulated and unregulated supplies), the cross section it has and for what connection it is set-in. 
 
     \vspace{5mm} %VERTICAL SPACE
     
     \begin{table}[h]
         \centering
-        \begin{tabular}{|c|c|c|} \hline 
-             Color&   Color-Code&  Voltage\\ \hline 
-             Red&     RD&          $22.2V_{nominal}$ (6S Batt -> $24V$ unregulated)\\ \hline 
-             Orange&  OG&          $11.1V_{nominal}$ (3S Batt -> $12V$ unregulated)\\ \hline 
-             Green&   GN&          $12V_{stable}$ ($V_{in}=V_{Prim-Battery}$, $P_{out}=120W$)\\ \hline 
-             Blue&    BU&          $5V_{stable}$ ($V_{in}=V_{Sec-Battery}$, $P_{out}=60W$)\\ \hline 
-             Black&   BK&          $3\phi$ AC for Drivetrain ($V_p \approx V_{Prim-Battery}$)
+        \begin{tabular}{|r|r|l|} \hline 
+             color&   code\footnotemark[1]&         voltage specifications\\ \hline 
+             red&     RD&                           $22.2V_{nominal}$ (6S Batt -> $24V$ unregulated)\\ \hline 
+             orange&  OG&                           $11.1V_{nominal}$ (3S Batt -> $12V$ unregulated)\\ \hline 
+             green&   GN&                           $12V_{stable}$ ($V_{in}=V_{Prim-Battery}$, $P_{out}=120W$)\\ \hline 
+             blue&    BU&                           $5V_{stable}$ ($V_{in}=V_{Sec-Battery}$, $P_{out}=60W$)\\ \hline 
+             black&   BK&                           $3\phi$ AC for Drivetrain ($V_p \approx V_{Prim-Battery}$)
          \\ \hline\end{tabular}
-        \caption{Caption}
-        \label{tab:my_label}
+        \caption{To avoid confusion, a distinction between voltage-levels must be made, especially to emphasize the difference between regulated and unregulated supply voltages. }
+        \label{wiring_diagram_legend}
     \end{table}
+
+    \footnotetext[1]{Color abbreviations according to \textbf{IEC 60757}}
+
+    \vspace{5mm} %VERTICAL SPACE
+
     
 
-    \begin{figure}[ht!]
+    \begin{figure}[ht!] %Float specifier check: passed!
         \paragraph{Top Level Architecture:}
         \centering
         \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.1.png}
         \caption{The wiring diagram incorporates several different aspects about how the rover is wired up, including the individual wire cross-sections, voltages and physical location of connections.}
-        \label{wiring_power}
+        \label{wiring_diagram}
     \end{figure}
 
     \clearpage %PAGE SPECIFIER
-
 
 \section{Energy Storage}
 
