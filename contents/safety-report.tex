@@ -144,9 +144,27 @@
 
     \subsection{Wiring diagram}
 
-    The top level architecture of the rover can be found on the next page. For clarity, details such as connector types and current return cables have been omitted and will be shown in the detailed diagrams further on in this document. As mentioned earlier, in this chapter, for making diagrams more structured, you can group the diagram into discrete blocks/areas. Compared to the power architecture (see figure \ref{power_architecture}, which is just a general way of showing the composition of electronics, the wiring diagram on the other hand ?????
+    The top level architecture of the rover can be found on the next page. For clarity, details such as connector types and current return cables have been omitted and will be shown in the smaller fractions further on within this document. As already mentioned, the diagrams group several parts into discrete blocks/areas, to make it look more structured at a glance. Compared to the power architecture (see figure \ref{power_architecture}), which is just a general way of showing the composition of electronics, the wiring diagram provides information about the voltage supplied by the wire (and differentiating between regulated and unregulated supplies), the cross section it has and for what connection it is set-in. 
+
+    \vspace{5mm} %VERTICAL SPACE
+    
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|} \hline 
+             Color&   Color-Code&  Voltage\\ \hline 
+             Red&     RD&          $22.2V_{nominal}$ (6S Batt -> $24V$ unregulated)\\ \hline 
+             Orange&  OG&          $11.1V_{nominal}$ (3S Batt -> $12V$ unregulated)\\ \hline 
+             Green&   GN&          $12V_{stable}$ ($V_{in}=V_{Prim-Battery}$, $P_{out}=120W$)\\ \hline 
+             Blue&    BU&          $5V_{stable}$ ($V_{in}=V_{Sec-Battery}$, $P_{out}=60W$)\\ \hline 
+             Black&   BK&          $3\phi$ AC for Drivetrain ($V_p \approx V_{Prim-Battery}$)
+         \\ \hline\end{tabular}
+        \caption{Caption}
+        \label{tab:my_label}
+    \end{table}
+    
 
     \begin{figure}[ht!]
+        \paragraph{Top Level Architecture:}
         \centering
         \includegraphics[width=1\textwidth]{contents/figures/wiring-diagram-p-v1.1.1.png}
         \caption{The wiring diagram incorporates several different aspects about how the rover is wired up, including the individual wire cross-sections, voltages and physical location of connections.}
