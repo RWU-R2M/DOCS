@@ -1,5 +1,7 @@
 # Documentation
 
+[![DOCS Rendering](https://github.com/RWU-R2M/DOCS/actions/workflows/latex.yml/badge.svg)](https://github.com/RWU-R2M/DOCS/actions/workflows/latex.yml)
+
 ## License 📃
 
 ```
