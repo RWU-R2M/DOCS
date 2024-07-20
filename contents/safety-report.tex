@@ -6,6 +6,9 @@
 
     \begin{figure}[h!] %Float specifier check: passed!
         \includegraphics{contents/figures/gfdl-logo.png}
+        \hspace{5mm} %HORIZONTAL SPACE
+        \includegraphics[width=1.5cm]{contents/figures/DOI_logo.png}
+        \href{http://dx.doi.org/10.13140/RG.2.2.30250.22723}{10.13140/RG.2.2.30250.22723}
     \end{figure}
 
     \vspace{5mm} %VERTICAL SPACE
@@ -15,18 +18,14 @@
 
     The source code to build this document, including all relevant information about the R2M project is available in a dedicated GitHub organization and actively maintained by its contributors: \\
     \href{https://github.com/RWU-R2M}{https://github.com/RWU-R2M}
-
+    
 \section{Introduction}
 
-    This document will serve as a comprehensive guide through the entire power distribution and wiring system of the rover. It meticulously details all relevant safety measures designed to minimize the likelihood of hazards or environmental damage. By following these guidelines, we aim to ensure that our work adheres to the highest safety standards. 
-
-    \vspace{5mm} %VERTICAL SPACE
-
-    In addition to outlining essential safety protocols, this guide sets forth the minimum standards for both material and personal safety. These standards apply not only during the construction phase but also throughout the actual operation of all electronic components during the competition. To enhance understanding and clarity, it includes several schematics, data sheets, and detailed calculations. These resources are designed to provide a thorough illustration of the rover's internal architecture and functionality, making the document as informative and accessible as possible.
+    This document will serve as a comprehensive guide through the entire power distribution and wiring system of the rover. It meticulously details all relevant safety measures designed to minimize the likelihood of hazards or environmental damage. By following these guidelines, we aim to ensure that our work adheres to the highest safety standards. In addition to outlining essential safety protocols, this guide sets forth the minimum standards for both material and personal safety. These standards apply not only during the construction phase but also throughout the actual operation of all electronic components during the competition. To enhance understanding and clarity, it includes several schematics, data sheets, and detailed calculations. These resources are designed to provide a thorough illustration of the rover's internal architecture and functionality, making the document as informative and accessible as possible.
 
     \begin{table}[b!] %Float specifier check: passed!
         \centering
-        \begin{tabular}{|r|r|r|r|} \hline %MUST REMAIN "R" TO BE COMPLIANT WITH INITAL RELEASE ON GITHUB. DO NOT CHANCE!!
+        \begin{tabular}{|r|r|r|r|} \hline %MUST REMAIN "R" TO BE COMPLIANT WITH INITAL RELEASE ON GITHUB. DO NOT CHANGE!!
              Revision& Date submitted& Summary of changes&  Authored      \\ \hline 
              v1.1.0&   23.06.2024&     1st CSTAG evalution& Leandro Ebner \\ \hline 
              v1.0.0&   16.06.2024&     Initial release&     Leandro Ebner \\ \hline
@@ -35,11 +34,11 @@
 
     \clearpage %PAGE SPECIFIER
     
-\section{Hazardous Material List}
+\section{Hazardous Materials}
 
     \subsection{Batteries}
     
-    The rover is using two lithium-polymer based batteries (further referred to as LiPo batteries) to power all the electronics. Batteries, in general, are compliant with the regulations set by the CIRC (see \ref{battery} of the appendix) as long as they are sealed and follow certain safety guidelines (i.e. using battery-management-systems to ensure usage within of manufacturer-specifications). LiPo batteries are designed as permanently sealed units, which contain their electrolytes within durable casing materials. This prevents the escape of hazardous substances under normal operating conditions. This cell chemistry is widely used in consumer electronics, remote-controlled vehicles, and other devices where safety and environmental compliance are critical and high electrical characteristics are required. This demonstrates their reliability and safety under proper use and are known for a high energy density as well as output power capability. For this reason, the LiPo cell chemistry was also utilized for energy storage in the rover.
+    The rover is using two lithium-polymer based batteries (further referred to as LiPo batteries) to power all the electronics. Batteries, in general, are compliant with the regulations set by the CIRC (see \ref{battery} of the appendix) as long as they are sealed and follow certain safety guidelines (i.e. using battery-management-systems to ensure usage within manufacturer-specifications). LiPo batteries are designed as permanently sealed units, which contain their electrolytes within durable casing materials. This prevents the escape of hazardous substances under normal operating conditions. This cell chemistry is widely used in consumer electronics, remote-controlled vehicles, and other devices where safety and environmental compliance are critical and high electrical characteristics are required. This demonstrates their reliability and safety under proper use and are known for a high energy density as well as output power capability. For this reason, the LiPo cell chemistry was also utilized for energy storage in the rover.
     
     \vspace{5mm} %VERTICAL SPACE
     
@@ -49,7 +48,7 @@
     
 \section{Power Design Illustration}
 
-    The rover's power architecture is divided into two separate power systems. This approach ensures galvanic isolation between the power and logic components, which is necessary to eliminate any possible wiring configuration in which a so-called "ground loop" could form. The underlying problem is based on the fact that there exists an interface and thus an electrical connection between the individual components. While the communication between power and logic components is implemented by establishing a physical connection between their corresponding GPIO pins and reading different voltage levels, there must be a precise reference voltage available at any given point in time. Generally speaking, this is done by using a common ground. Hence, the most basic form to utilize that common ground connection is to form a "star ground." If there are multiple paths to ground, a ground loop is present. These ground loops, in combination with wire inductance, can cause issues for high-current electronics like the rover's motor controllers (in this particular case utilizing ODrives). This is further illustrated in figure \ref{ground_loop_bad}.
+    The rover's power architecture is divided into two separate power systems. This approach ensures galvanic isolation between the power and logic components, which is necessary to eliminate any possible wiring configuration in which a so-called "ground loop" could form. The underlying problem is based on the fact that there exists an interface and thus an electrical connection between the individual components. While the communication between power and logic components is implemented by establishing a physical connection between their corresponding GPIO pins and reading different voltage levels, there must be a precise reference voltage available at any given point in time. Generally speaking, this is done by using a common ground. Hence, the most basic form to utilize that common ground connection is to form a "star ground." If there are multiple paths to ground, a ground loop is present. These ground loops, in combination with wire inductance, can cause issues for high-current electronics like the rover's motor controllers (in this particular case utilizing "ODrives"). This is further illustrated in figure \ref{ground_loop_bad}.
     
     \begin{figure}[h] %Float specifier check: passed!
         \includegraphics[width=\textwidth]{contents/figures/ground_loop_bad.png}
@@ -116,7 +115,7 @@
         \label{color_codes}
     \end{table}
 
-    Instead of using a generic ampacity-table in the same fashion CSTAG provided an \href{https://web.archive.org/web/20230310184047/https://www.coonerwire.com/amp-chart/}{\textbf{\underline{example}}}, the current-values have been calculated for the case of 2 or 3 conductors together in a raceway, conduit, or cable. The given example was refering to a single conductor in free air. This scenario is much less realistic in real-life applications while also providing less headroom if the wiring is done differently. The ampacity in table \ref{color_codes} holds true for an insulation temperature up to 90°C in respect to an ambient temperature of 30°C. The ambient temperature in Drumheller in summer is close to 40°C, and needs to be accounted. This correction should also address the fact that the temperature inside the rover is likely 20°C higher than outdoors, depending on cooling strategies, rover material, paint colour, and other factors. For a total ambient temperature rise up to $\Delta T_{max} = 30K$, a factor as low as $\lambda = 0.71$ as stated in the "NFPA 70" can be applied.
+    Instead of using a generic ampacity-table in the same fashion CSTAG provided an \href{https://web.archive.org/web/20230310184047/https://www.coonerwire.com/amp-chart/}{\textbf{\underline{example}}}, the current-values have been calculated for the case of 2 or 3 conductors together in a raceway, conduit, or common cable. The given example was refering to a single conductor in free air. This scenario is much less realistic in real-life applications while also providing less headroom if the wiring is done differently. The ampacity in table \ref{color_codes} holds true for an insulation temperature up to 90°C in respect to an ambient temperature of 30°C. The ambient temperature in Drumheller in summer is close to 40°C, and needs to be accounted. This correction should also address the fact that the temperature inside the rover is likely 20°C higher than outdoors, depending on cooling strategies, rover material, paint colour, and other factors. For a total ambient temperature rise up to $\Delta T_{max} = 30K$, a factor as low as $\lambda = 0.71$ as stated in the "NFPA 70" can be applied. Those steps ensure compliance with the CIRC regulation \ref{nfpa}.
 
     \footnotetext[1]{Ferrule colors according to \textbf{DIN 46228}}
     \footnotetext[2]{Color abbreviations according to \textbf{IEC 60757}}
@@ -129,19 +128,19 @@
 
     For terminating the wires, either wire ferrules or nylon (polyamide) connectors have been used. Only "DIN 46228" compliant wire ferrules are used in the rover, sticking to our already existing color scheme. Also, by following the DIN norm, the ferrules will always be suited for the current related to the cross section they are terminating. Similar to the set of wires and wire ferrules, power connectors have been chosen beforehand to follow the electrical requirements. There is a selection of three nylon (polyamide) based connectors named "XT30" (see \ref{xt30}), "XT60" (see \ref{xt60}) and "XT90" (see \ref{xt90}). Their current rating in the same order reaches from $15A$, $30A$ to $40A$. The rating of the connector naming scheme refers to an approved short burst current up to twice of their constant current rating. Also, all power-delivering connectors are highly temperature resistant. As a critical point of failure, where contact resistances have a big influence, this is a precautions step, mandatory for dealing with high currents where short-circuits very likely introduce fire hazards. The fire resistance has been tested according to "IEC 60695-11-10" and all connectors passed the result "94V-0". Further information can be extracted in the appendix.
 
-    \subsection{Dispatch about creating diagrams}
+\section{Dispatch About Creating Diagrams}
 
     The exact wiring of the rover may vary at any given point in time, especially during the high development phase in the beginning of the electrical construction. To keep track of those physical snapshots and to make updating the documentation easier in the long-term run, a versioning system has been implemented. It's built upon the idea of "Semantic Versioning", a specification originally authored by \href{https://tom.preston-werner.com/}{\textbf{\underline{Tom Preston-Werner}}}. This allows to easily change things in the future by incrementing either the major/minor or patch version of the diagram release. By using the program "Git" to manage and "GitHub" to host those releases, old revisions of diagrams will be archived and the changes between each revision remains accessible anytime. To furthermore benefit from the broad functionality of Git, diagrams are not directly created with the help of an ordinary "WYSIWYG" editor, instead they are written in a markup language (= "WYSIWYM" in this case) and rendered into a separate graphic later. 
 
     \vspace{5mm} %VERTICAL SPACE
 
-    All diagrams are written with the help of the JavaScript-based tool "Mermaid". Diagrams and documentation itself cost precious time to come up with and suffer from being outdated fairly quickly, as long as the development continues. Those issues can be managed by taking advantage of JavaScript-based graphics and diagrams. The R2M documentations can to catch up with development while appearance and format of every diagram can be altered later on, focusing on the actual content first. This is especially useful to follow the CIRC requirement \ref{req7.5} to guarantee the diagrams reflect ongoing changes.
+    All diagrams are written with the help of the JavaScript-based tool "Mermaid". Diagrams and documentation itself cost precious time to come up with and suffer from being outdated fairly quickly, as long as the development continues. Those issues can be managed by taking advantage of JavaScript-based graphics and diagrams. The R2M documentations can catch up with development while appearance and format of every diagram can be altered later on, focusing on the actual content first. This is especially useful to follow the CIRC requirement \ref{req7.5} to guarantee the diagrams reflect ongoing changes.
 
     \clearpage %PAGE SPECIFIER
 
-    \subsection{Wiring diagram}
+\section{Wiring Diagram}
 
-    The top level architecture of the rover can be found on the next page (figure \ref{wiring_diagram}). For clarity, details such as connector types and current return cables have been omitted and will be shown in the smaller fractions further on within this document. As already mentioned, the diagrams group several parts into discrete blocks/areas, to make it look more structured at a glance. Compared to the power architecture (see figure \ref{power_architecture}), which is just a general way of showing the composition of electronics, the wiring diagram (table \ref{wiring_diagram_legend}) provides information about the voltage supplied by the wire (and differentiates between regulated and unregulated supplies), the cross section it has and for what connection it is set-in. 
+    The top level architecture of the rover can be found on the next pages (figure \ref{wiring_diagram}). For clarity, details such as connector types and current return cables have been omitted and will be shown in the smaller fractions further on within this document. As already mentioned, the diagrams group several parts into discrete blocks/areas, to make it look more structured at a glance. Compared to the power architecture (see figure \ref{power_architecture}), which is just a general way of showing the composition of electronics, the wiring diagram (table \ref{wiring_diagram_legend}) provides information about the voltage supplied by the wire (and differentiates between regulated and unregulated supplies), the cross section it has and for what connection it is set-in. 
 
     \vspace{5mm} %VERTICAL SPACE
     
@@ -163,6 +162,34 @@
 
     \vspace{5mm} %VERTICAL SPACE
 
+    \subsection{Fusing}
+    
+    Fuses are crucial in electronics, including rovers. Automotive fuses are especially suitable for this purpose, as they are designed to protect vehicle wiring and electrical equipment, typically rated for circuits up to 32 volts DC. They are also commonly used in other low voltage DC systems, such as those in towed campers and marine applications like sailboats and smaller motorboats. To maintain simplicity, the rover uses a single size of automotive fuse known as the "ATO" type, standardized under ISO 8820-3. The broad availability and wide variety of current ratings make these fuses are appropriate choice while keeping the costs low reasonable having several circuits that need to be protected.
+
+    \vspace{5mm} %VERTICAL SPACE
+
+    To eliminate time consuming replacements and also speed up debugging scenarios, thermal circuit breakers in the formfactor of ATO fuses are used. When the circuit breaker trips, the integrated switch function enables immediate reactivation. Unlike a fuse, the circuit breaker does not need to be replaced. 
+
+    \clearpage %PAGE SPECIFIER
+    
+    Similar to convectional fuses, they come with a distinct trip-behavior: The higher the overload, the faster the thermal circuit breaker trips. This is depended of the absolute current rating and the fuse's specified characteristic. All fuses built into the rover use a uniformly internal naming scheme with the following pattern: "\$A \$-Fused". 
+
+    \vspace{5mm} %VERTICAL SPACE
+    
+    \begin{wrapfigure}{r!}{0.6\textwidth} %this figure will be at the right
+        \centering
+        \includegraphics[width=0.6\textwidth]{contents/figures/f-type-fuse.png}
+        \caption{TCP with fast trip-response.}
+        \label{f-type}
+        \includegraphics[width=0.6\textwidth]{contents/figures/m-type-fuse.png}
+        \caption{TCP with medium trip-response.}
+        \label{m-type}
+    \end{wrapfigure}
+
+    In this naming convention, the current rating and trip-behaviour is given as a variable. The special thermal-triggered fuses will be refereed to as "TCP" (= Thermal Circuit Protection). There are 2 different trip-response characteristics for TCPs supplied by "Phoenix Contact", being fast and medium fast. The diagrams for their response can be seen in figure \ref{f-type} as well as in figure \ref{m-type}. In general, "M-type" fuses were used where a wider variation of current draw can occur. This is the case for the drive train or other components directly powered by the battery (high inrush current). For components using a DC/DC converter, the upstream fuse is following "F-type" trip-responses. The reason behind this is, that DC/DC converters usually come with onboard e-fuses and cap out at distinct ampacitys. If the current is higher than specified in the datasheet of the converter, the fuse needs to switch off immediately. This is important to estimate the correct current rating of the fuse, furthermore depended on the cut-off time. 
+
+    \clearpage %PAGE SPECIFIER
+
     \begin{figure}[ht!] %Float specifier check: passed!
         \paragraph{Top Level Architecture:}
         \centering
@@ -173,19 +200,39 @@
 
     \clearpage %PAGE SPECIFIER
 
-\section{Energy Storage}
+    \subsection{CAD planning of DIN-mounting-rails}
 
+    Sticking to industrial standardized mounting rails for the main wiring and distribution box is favourable. To accomplish this process, blueprints in CAD have been created to fit all the components and distribution blocks inside of a custom built wiring enclosure/switching cabinet later on. 
 
+    \begin{figure}[h!] %Float specifier check: passed!
+        \centering
+        \includegraphics[width=1\linewidth]{contents/figures/bird-view_rails.png}
+        \caption{Bird's-eye view onto the components. Several rails will be used stacked vertically in a wiring cabinet. The total length of rail can be calculated by summing up the width-units per rail and choosing a corresponding enclosure.}
+        \label{bird-cad}
+    \end{figure}
 
-\section{Emergency Stop}
+    \clearpage %PAGE SPECIFIER
 
-\section{Power Distribution}
+    \begin{figure}[h!] %Float specifier check: passed!
+        \vspace{1cm}
+        \includegraphics[width=1\linewidth]{contents/figures/diagonal-view_rails.png}
+        \caption{3D mock-up of the components mounted onto DIN-rails. Also factors like the total height, heat dissipation, air flow and fans and must be taken into account. The majority of components are rendered as a "black box" to reduce overall complexity of the CAD design. Their exact surface can be modelled in the future, this is however not strictly necessary for general planning.}
+        \label{diagonal-cad}
+    \end{figure}
 
-\section{Power Conversion}
+    
 
-\section{Power Consuming Circuits}
+%\section{Energy Storage}
 
-\section{Unused Circuits}
+%\section{Emergency Stop}
 
-\section{Circuit Table}
+%\section{Power Distribution}
+
+%\section{Power Conversion}
+
+%\section{Power Consuming Circuits}
+
+%\section{Unused Circuits}
+
+%\section{Circuit Table}
 
