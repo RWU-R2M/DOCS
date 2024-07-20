@@ -128,7 +128,7 @@
 
     For terminating the wires, either wire ferrules or nylon (polyamide) connectors have been used. Only "DIN 46228" compliant wire ferrules are used in the rover, sticking to our already existing color scheme. Also, by following the DIN norm, the ferrules will always be suited for the current related to the cross section they are terminating. Similar to the set of wires and wire ferrules, power connectors have been chosen beforehand to follow the electrical requirements. There is a selection of three nylon (polyamide) based connectors named "XT30" (see \ref{xt30}), "XT60" (see \ref{xt60}) and "XT90" (see \ref{xt90}). Their current rating in the same order reaches from $15A$, $30A$ to $40A$. The rating of the connector naming scheme refers to an approved short burst current up to twice of their constant current rating. Also, all power-delivering connectors are highly temperature resistant. As a critical point of failure, where contact resistances have a big influence, this is a precautions step, mandatory for dealing with high currents where short-circuits very likely introduce fire hazards. The fire resistance has been tested according to "IEC 60695-11-10" and all connectors passed the result "94V-0". Further information can be extracted in the appendix.
 
-\section{Dispatch about creating diagrams}
+\section{Dispatch About Creating Diagrams}
 
     The exact wiring of the rover may vary at any given point in time, especially during the high development phase in the beginning of the electrical construction. To keep track of those physical snapshots and to make updating the documentation easier in the long-term run, a versioning system has been implemented. It's built upon the idea of "Semantic Versioning", a specification originally authored by \href{https://tom.preston-werner.com/}{\textbf{\underline{Tom Preston-Werner}}}. This allows to easily change things in the future by incrementing either the major/minor or patch version of the diagram release. By using the program "Git" to manage and "GitHub" to host those releases, old revisions of diagrams will be archived and the changes between each revision remains accessible anytime. To furthermore benefit from the broad functionality of Git, diagrams are not directly created with the help of an ordinary "WYSIWYG" editor, instead they are written in a markup language (= "WYSIWYM" in this case) and rendered into a separate graphic later. 
 
@@ -138,7 +138,7 @@
 
     \clearpage %PAGE SPECIFIER
 
-\section{Wiring diagram}
+\section{Wiring Diagram}
 
     The top level architecture of the rover can be found on the next pages (figure \ref{wiring_diagram}). For clarity, details such as connector types and current return cables have been omitted and will be shown in the smaller fractions further on within this document. As already mentioned, the diagrams group several parts into discrete blocks/areas, to make it look more structured at a glance. Compared to the power architecture (see figure \ref{power_architecture}), which is just a general way of showing the composition of electronics, the wiring diagram (table \ref{wiring_diagram_legend}) provides information about the voltage supplied by the wire (and differentiates between regulated and unregulated supplies), the cross section it has and for what connection it is set-in. 
 
@@ -179,19 +179,16 @@
     \begin{wrapfigure}{r!}{0.6\textwidth} %this figure will be at the right
         \centering
         \includegraphics[width=0.6\textwidth]{contents/figures/f-type-fuse.png}
-        \caption{TCP with fast trip-reponse}
+        \caption{TCP with fast trip-response.}
         \label{f-type}
         \includegraphics[width=0.6\textwidth]{contents/figures/m-type-fuse.png}
-        \caption{TCP with medium trip-reponse}
+        \caption{TCP with medium trip-response.}
         \label{m-type}
     \end{wrapfigure}
 
     In this naming convention, the current rating and trip-behaviour is given as a variable. The special thermal-triggered fuses will be refereed to as "TCP" (= Thermal Circuit Protection). There are 2 different trip-response-characteristics for TCPs supplied by "Phoenix Contact", being fast and medium fast. The diagrams for their response can be seen in figure \ref{f-type} as well as in figure \ref{m-type}. Using a relative scaling of the current allows to easily calculate and compare fuses with different current rating with those 2 diagrams. 
 
     \clearpage %PAGE SPECIFIER
-
-
-
 
     \begin{figure}[ht!] %Float specifier check: passed!
         \paragraph{Top Level Architecture:}
@@ -203,9 +200,24 @@
 
     \clearpage %PAGE SPECIFIER
 
-\section{Energy Storage}
+    \subsection{CAD planning of DIN-mounting-rails}
 
+    Sticking to industrial standardized mounting rails for the main wiring and distribution box is favourable. To accomplish this process, blueprints in CAD have been created to fit all the components and distribution blocks inside of a custom built enclosure/switching cabinet later on. 
 
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{contents/figures/bird-view_rails.png}
+        \caption{Bird's-eye view onto the components.}
+        \label{bird-cad}
+        \vspace{1cm}
+        \includegraphics[width=1\linewidth]{contents/figures/diagonal-view_rails.png}
+        \caption{3D mock-up of the components mounted onto DIN-rails.}
+        \label{diagonal-cad}
+    \end{figure}
+
+    
+
+%\section{Energy Storage}
 
 %\section{Emergency Stop}
 
