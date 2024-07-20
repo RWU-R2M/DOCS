@@ -1,42 +1,33 @@
-\documentclass[type=bachelor,twoside,BCOR=1cm]{rwuthesis}
+\documentclass[]{article}
+\usepackage{graphicx}
+\graphicspath{ {./contents/figures} }
 
 \usepackage[pdfusetitle]{hyperref}
 \hypersetup{
     colorlinks = true, 
     breaklinks,
-    urlcolor=rwucyan, 
-    linkcolor=rwuviolet,
-    citecolor=rwuviolet
+    urlcolor=cyan, 
+    linkcolor=red,
+    citecolor=red
 }
 
+\usepackage[]{biblatex}                  
+\addbibresource{bibliography.bib} 
 
-\usepackage{graphicx}
-\graphicspath{ {./contents/figures} }
+\usepackage{wrapfig}
 
-
-\title{Whitepaper: Rover to Mars}
-\author{Leandro Ebner | ORCID: 0009-0006-2742-3750}
-\authormail{leandro.ebner@rwu.de}
-\fordegree{(within the framework of R2M)}
-\firstreviewer{Prof. Dr. rer. nat. Markus Pfeil}
-\firstreviewermail{markus.pfeil@rwu.de}
-\secondreviewer{Benjamin Stähle M.Sc.}
-\secondreviewermail{staehle@rwu.de}
-\degreecourse{Electrical Engineering \& Information Technology}
-\faculty{Electrical Engineering and Computer Science}
-\date{\today}
+\title{Whitepaper}
 
 \begin{document}
 
-\maketitle
+
 \tableofcontents
 
+\include{./contents/abtract}
 \include{./contents/safety-report}
 \include{./contents/appendix}
 \include{./contents/batteries}
 \include{./contents/connectors}
 
-
 \end{document}
-
 
