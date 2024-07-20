@@ -186,7 +186,7 @@
         \label{m-type}
     \end{wrapfigure}
 
-    In this naming convention, the current rating and trip-behaviour is given as a variable. The special thermal-triggered fuses will be refereed to as "TCP" (= Thermal Circuit Protection). There are 2 different trip-response-characteristics for TCPs supplied by "Phoenix Contact", being fast and medium fast. The diagrams for their response can be seen in figure \ref{f-type} as well as in figure \ref{m-type}. Using a relative scaling of the current allows to easily calculate and compare fuses with different current rating with those 2 diagrams. 
+    In this naming convention, the current rating and trip-behaviour is given as a variable. The special thermal-triggered fuses will be refereed to as "TCP" (= Thermal Circuit Protection). There are 2 different trip-response-characteristics for TCPs supplied by "Phoenix Contact", being fast and medium fast. The diagrams for their response can be seen in figure \ref{f-type} as well as in figure \ref{m-type}. In general, "M-type" fuses were used where a wider variation of current draw can occur. This is the case for the drive train or other components directly powered by the battery (high inrush current). For components using a DC/DC converter, the upstream fuse is following "F-type" trip-responses. The reason behind this is, that DC/DC converters usually come with onboard e-fuses and cap out at distinct ampacitys. If the current is higher than specified in the datasheet of the converter, the fuse needs to switch off immediately. 
 
     \clearpage %PAGE SPECIFIER
 
@@ -202,16 +202,21 @@
 
     \subsection{CAD planning of DIN-mounting-rails}
 
-    Sticking to industrial standardized mounting rails for the main wiring and distribution box is favourable. To accomplish this process, blueprints in CAD have been created to fit all the components and distribution blocks inside of a custom built enclosure/switching cabinet later on. 
+    Sticking to industrial standardized mounting rails for the main wiring and distribution box is favourable. To accomplish this process, blueprints in CAD have been created to fit all the components and distribution blocks inside of a custom built wiring enclosure/switching cabinet later on. 
 
-    \begin{figure}
+    \begin{figure}[h!] %Float specifier check: passed!
         \centering
         \includegraphics[width=1\linewidth]{contents/figures/bird-view_rails.png}
-        \caption{Bird's-eye view onto the components.}
+        \caption{Bird's-eye view onto the components. Several rails will be used stacked vertically in a wiring cabinet. The total length of rail can be calculated by summing up the width-units per rail and choosing a corresponding enclosure.}
         \label{bird-cad}
+    \end{figure}
+
+    \clearpage %PAGE SPECIFIER
+
+    \begin{figure}[h!] %Float specifier check: passed!
         \vspace{1cm}
         \includegraphics[width=1\linewidth]{contents/figures/diagonal-view_rails.png}
-        \caption{3D mock-up of the components mounted onto DIN-rails.}
+        \caption{3D mock-up of the components mounted onto DIN-rails. Also factors like the total height, heat dissipation, air flow and fans and must be taken into account. The majority of components are rendered as a "black box" to reduce overall complexity of the CAD design. Their exact surface can be modelled in the future, this is however not strictly necessary for general planning.}
         \label{diagonal-cad}
     \end{figure}
 
